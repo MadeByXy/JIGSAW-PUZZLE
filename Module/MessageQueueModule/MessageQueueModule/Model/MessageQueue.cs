@@ -48,10 +48,8 @@ namespace MessageQueueModule.Model
                 exchangeName: "",
                 routingKey: queueName));
 
-            Task.Run(() =>
-            {
-                RpcServer.MainLoop();
-            });
+            //MainLoop方法会阻塞线程, 所以要放到Task中
+            Task.Run(() => { RpcServer.MainLoop(); });
         }
 
         private IConnection Connection { get; set; }
@@ -62,7 +60,7 @@ namespace MessageQueueModule.Model
         private static string SystemId { get; set; } = Guid.NewGuid().ToString();
 
         /// <summary>
-        /// RabbitMQ连接频道
+        /// RabbitMQ 连接频道
         /// </summary>
         private IModel Channel { get; set; }
 
@@ -149,57 +147,6 @@ namespace MessageQueueModule.Model
                 }
             }, data.ToSerialization());
             callback(result.Body.FromSerialization<Result>());
-            return;
-            //var listenerNum = (int)Channel.ConsumerCount(queueName);
-            //listenerNum = 1;
-            //if (listenerNum == 0)
-            //{
-            //    //如果没有人, 就不去监听
-            //    callback(new Result { Success = true });
-            //}
-            //else
-            //{
-            //    callback(RpcClient.Call(data.ToSerialization()).FromSerialization<Result>());
-            //}
-            //return;
-
-            //var msg = RpcClient.Call(data.ToSerialization()).FromSerialization<Result>();
-
-            //ConfirmConsumer(queueName);
-            ////Channel.ConfirmSelect();
-            //Publish(queueName, data);
-
-            //SimpleRpcServer rpc = new SimpleRpcServer(new Subscription(Channel, queueName));
-
-
-            ////声明一个结果队列
-            ////QueueDeclare(CreateCallbackName(queueName));
-
-
-
-            ////设置超时时间, 避免回调被阻塞
-            //var timer = new System.Timers.Timer(Channel.ContinuationTimeout.TotalMilliseconds);
-            //timer.Elapsed += new System.Timers.ElapsedEventHandler((sender, e) =>
-            //{
-            //    listenerNum = 0;
-            //});
-            //timer.Start();
-
-            //Subscribe(CreateCallbackName(queueName), new Action<Result>((result) =>
-            //{
-            //    callback?.Invoke(result);
-            //    listenerNum--;
-            //}));
-
-
-            ////if (Channel.WaitForConfirms())
-            ////{
-            ////    return;
-            ////}
-
-            ////等待返回
-            //while (listenerNum > 0) { }
-            //return;
         }
 
         /// <summary>
@@ -236,26 +183,6 @@ namespace MessageQueueModule.Model
                 var data = bytes.FromSerialization<T>();
                 return callback?.Invoke(data) ?? new Result { Success = true };
             });
-            return;
-            ConfirmConsumer(queueName);
-            Consumers[queueName].Received += (model, deliver) =>
-            {
-                try
-                {
-                    var data = deliver.Body.FromSerialization<T>();
-                    var result = callback?.Invoke(data);
-
-                    if (result != null)
-                    {
-                        //如果存在结果, 将结果推送回发布者
-                        Publish(CreateCallbackName(queueName), result, deliver.Exchange);
-                    }
-                }
-                catch (Exception e)
-                {
-                    InjectionModule.Log.LogException(InjectionModule.ModuleName, e, $"队列名称: {queueName}");
-                }
-            };
         }
 
         /// <summary>

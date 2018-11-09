@@ -19,7 +19,6 @@ namespace RegistryLibrary.ImplementsClass
         {
             QueueName = queueName;
             MessageQueue = messageQueue;
-            //MessageQueue.QueueDeclare(queueName);
         }
 
         /// <summary>

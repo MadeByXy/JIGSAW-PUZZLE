@@ -28,7 +28,13 @@ namespace DemoModule.Model
             //注入消息队列
             PrepareCreatedEvent += new Func<DemoModel, UserInfo, Result>((DemoModel data, UserInfo userInfo) =>
             {
-                Console.WriteLine($"预创建验证监听成功, 创建人：{userInfo.UserName}, 附加消息:{data.Message}");
+                Console.WriteLine($"预创建验证监听失败测试, 创建人：{userInfo.UserName}, 附加消息:{data.Message}");
+                return new ApiResult<DBNull, DBNull> { Success = true, Message = "测试通过" };
+            });
+
+            PrepareCreatedEvent += new Func<DemoModel, UserInfo, Result>((DemoModel data, UserInfo userInfo) =>
+            {
+                Console.WriteLine($"预创建验证监听成功2, 创建人：{userInfo.UserName}, 附加消息:{data.Message}");
                 return new ApiResult<DBNull, DBNull> { Success = true, Message = "测试通过" };
             });
 
