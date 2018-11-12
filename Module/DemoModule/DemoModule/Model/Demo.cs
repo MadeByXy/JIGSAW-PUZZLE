@@ -27,46 +27,46 @@ namespace DemoModule.Model
             DeleteEvent = new MessageEvent<DemoModel, UserInfo>("Demo_DeleteEvent", InjectionModule.MessageQueue);
 
             //注入消息队列
-            PrepareCreatedEvent += new Func<DemoModel, UserInfo, Result>((DemoModel data, UserInfo userInfo) =>
+            PrepareCreatedEvent.Subscribe((DemoModel data, UserInfo userInfo) =>
             {
                 Console.WriteLine($"预创建验证监听失败测试, 创建人：{userInfo.UserName}, 附加消息:{data.Message}");
                 return new ApiResult<DBNull, DBNull> { Success = true, Message = "测试通过" };
             });
 
-            PrepareCreatedEvent += new Func<DemoModel, UserInfo, Result>((DemoModel data, UserInfo userInfo) =>
+            PrepareCreatedEvent.Subscribe((DemoModel data, UserInfo userInfo) =>
             {
                 Console.WriteLine($"预创建验证监听成功2, 创建人：{userInfo.UserName}, 附加消息:{data.Message}");
                 return new ApiResult<DBNull, DBNull> { Success = true, Message = "测试通过" };
             });
 
-            CreatedEvent += new Action<DemoModel, UserInfo>((DemoModel data, UserInfo userInfo) =>
+            CreatedEvent.Subscribe((DemoModel data, UserInfo userInfo) =>
             {
                 Console.WriteLine($"创建结束监听成功, 创建人：{userInfo.UserName}, 附加消息:{data.Message}");
             });
 
-            CreatedEvent += new Action<DemoModel, UserInfo>((DemoModel data, UserInfo userInfo) =>
+            CreatedEvent.Subscribe((DemoModel data, UserInfo userInfo) =>
             {
                 Console.WriteLine($"创建结束监听成功, 创建人：{userInfo.UserName}, 附加消息:{data.Message}");
             });
 
-            PrepareModifiedEvent += new Func<DemoModel, UserInfo, Result>((DemoModel data, UserInfo userInfo) =>
+            PrepareModifiedEvent.Subscribe((DemoModel data, UserInfo userInfo) =>
             {
                 Console.WriteLine($"预修改验证监听成功, 修改人：{userInfo.UserName}, 附加消息:{data.Message}");
                 return new ApiResult<DBNull, DBNull> { Success = true, Message = "测试通过" };
             });
 
-            ModifiedEvent += new Action<DemoModel, UserInfo>((DemoModel data, UserInfo userInfo) =>
+            ModifiedEvent.Subscribe((DemoModel data, UserInfo userInfo) =>
             {
                 Console.WriteLine($"修改结束监听成功, 修改人：{userInfo.UserName}, 附加消息:{data.Message}");
             });
 
-            PrepareDeleteEvent += new Func<DemoModel, UserInfo, Result>((DemoModel data, UserInfo userInfo) =>
+            PrepareDeleteEvent.Subscribe((DemoModel data, UserInfo userInfo) =>
             {
                 Console.WriteLine($"预删除验证监听成功, 删除人：{userInfo.UserName}, 附加消息:{data.Message}");
                 return new ApiResult<DBNull, DBNull> { Success = true, Message = "测试不通过测试" };
             });
 
-            DeleteEvent += new Action<DemoModel, UserInfo>((DemoModel data, UserInfo userInfo) =>
+            DeleteEvent.Subscribe((DemoModel data, UserInfo userInfo) =>
             {
                 Console.WriteLine($"删除结束监听成功, 删除人：{userInfo.UserName}, 附加消息:{data.Message}");
             });

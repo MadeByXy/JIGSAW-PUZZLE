@@ -13,11 +13,11 @@ namespace RegistryLibrary.Interface.Event
         /// 创建前发出的事件
         /// 指示是否可以被创建
         /// </summary>
-        MessageEvent<DataType, UserInfo> PrepareCreatedEvent { get; set; }
+        IEvent<DataType, UserInfo> PrepareCreatedEvent { get; set; }
 
         /// <summary>
         /// 创建后发出的事件
         /// </summary>
-        MessageEvent<DataType, UserInfo> CreatedEvent { get; set; }
+        IEvent<DataType, UserInfo> CreatedEvent { get; set; }
     }
 }

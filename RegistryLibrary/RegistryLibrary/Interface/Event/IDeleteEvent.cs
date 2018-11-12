@@ -13,11 +13,11 @@ namespace RegistryLibrary.Interface.Event
         /// 删除前发出的事件
         /// 指示是否可以被删除
         /// </summary>
-        MessageEvent<DataType, UserInfo> PrepareDeleteEvent { get; set; }
+        IEvent<DataType, UserInfo> PrepareDeleteEvent { get; set; }
 
         /// <summary>
         /// 删除后发出的事件
         /// </summary>
-        MessageEvent<DataType, UserInfo> DeleteEvent { get; set; }
+        IEvent<DataType, UserInfo> DeleteEvent { get; set; }
     }
 }

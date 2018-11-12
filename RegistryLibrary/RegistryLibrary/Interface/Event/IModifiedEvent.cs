@@ -13,11 +13,11 @@ namespace RegistryLibrary.Interface.Event
         /// 修改前发出的事件
         /// 指示是否可以被修改
         /// </summary>
-        MessageEvent<DataType, UserInfo> PrepareModifiedEvent { get; set; }
+        IEvent<DataType, UserInfo> PrepareModifiedEvent { get; set; }
 
         /// <summary>
         /// 修改后发出的事件
         /// </summary>
-        MessageEvent<DataType, UserInfo> ModifiedEvent { get; set; }
+        IEvent<DataType, UserInfo> ModifiedEvent { get; set; }
     }
 }
