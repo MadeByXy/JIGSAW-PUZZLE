@@ -1,5 +1,4 @@
 ﻿using RegistryLibrary.Interface.Common;
-using System;
 using System.Collections.Generic;
 
 namespace RegistryLibrary.ImplementsClass
@@ -24,6 +23,6 @@ namespace RegistryLibrary.ImplementsClass
         /// <summary>
         /// 数据数量
         /// </summary>
-        public int total { get; set; } = 0;
+        public int Total { get; set; } = 0;
     }
 }
