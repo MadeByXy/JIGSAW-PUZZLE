@@ -20,11 +20,11 @@ namespace DemoSystem
 
             new DemoModule.InjectionModule(messageQueue);
             DemoModule = new Demo();
-            //DemoModule.PrepareDeleteEvent += new Func<DemoModel, UserInfo, Result>((DemoModel d, UserInfo u) =>
-            //{
-            //    Console.WriteLine("错误注入测试成功");
-            //    return new ApiResult<DBNull, DBNull> { Success = false, Message = "错误注入测试" };
-            //});
+            DemoModule.PrepareDeleteEvent.Subscribe((DemoModel d, UserInfo u) =>
+            {
+                Console.WriteLine("错误注入测试成功");
+                return new ApiResult<DBNull, DBNull> { Success = false, Message = "错误注入测试" };
+            });
 
         }
 

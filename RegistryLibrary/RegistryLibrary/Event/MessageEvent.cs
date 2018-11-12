@@ -13,7 +13,7 @@ namespace RegistryLibrary.Event
     public class MessageEvent<T> : IEvent<T>
     {
         /// <summary>
-        /// 实例化<see cref="MessageEvent{T}"/>
+        /// 依赖于消息队列的事件模块
         /// </summary>
         /// <param name="queueName">队列名称</param>
         /// <param name="messageQueue">消息队列实现类</param>
@@ -36,12 +36,30 @@ namespace RegistryLibrary.Event
         /// <summary>
         /// 订阅消息
         /// </summary>
+        /// <param name="callback">回调方法</param>
+        public void Subscribe(Action<T> callback)
+        {
+            MessageQueue.Subscribe(QueueName, callback);
+        }
+
+        /// <summary>
+        /// 订阅消息
+        /// </summary>
+        /// <param name="callback">回调方法</param>
+        public void Subscribe(Func<T, Result> callback)
+        {
+            MessageQueue.Subscribe(QueueName, callback);
+        }
+
+        /// <summary>
+        /// 订阅消息
+        /// </summary>
         /// <param name="message">事件内容</param>
         /// <param name="callback">订阅方法</param>
         /// <returns></returns>
         public static MessageEvent<T> operator +(MessageEvent<T> message, Func<T, Result> callback)
         {
-            message.MessageQueue.Subscribe(message.QueueName, callback);
+            message.Subscribe(callback);
             return message;
         }
 
@@ -53,7 +71,7 @@ namespace RegistryLibrary.Event
         /// <returns></returns>
         public static MessageEvent<T> operator +(MessageEvent<T> message, Action<T> callback)
         {
-            message.MessageQueue.Subscribe(message.QueueName, callback);
+            message.Subscribe(callback);
             return message;
         }
 

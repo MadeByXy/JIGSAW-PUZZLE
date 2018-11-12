@@ -50,7 +50,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="InjectionModule.cs" />
+    <Compile Include="Model\MessageQueue.Consumer.cs">
+      <DependentUpon>MessageQueue.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\MessageQueue.cs" />
+    <Compile Include="Model\MessageQueue.Producer.cs">
+      <DependentUpon>MessageQueue.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\RpcServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

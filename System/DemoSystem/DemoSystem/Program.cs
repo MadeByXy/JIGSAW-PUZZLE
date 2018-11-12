@@ -37,20 +37,23 @@ namespace DemoSystem
             var userInfo = new UserInfo { UserId = "test", UserName = "test_user" };
             var data = new DemoModel { PrimaryKey = 10, Message = "系统调用验证" };
 
-            var nowDate = DateTime.Now;
-            var loop = 1;
-            for (var i = 0; i < loop; i++)
-            {
-                Invoke(demo, userInfo, data);
-            }
-            var span = DateTime.Now - nowDate;
-            Console.WriteLine($"执行{loop}次, 共计用时: {span.TotalSeconds}秒, 平均用时: {(span.TotalMilliseconds / loop)}毫秒");
+            Invoke(demo, userInfo, data);
+
+            //var nowDate = DateTime.Now;
+            //var loop = 1;
+            //for (var i = 0; i < loop; i++)
+            //{
+            //    Invoke(demo, userInfo, data);
+            //}
+            //var span = DateTime.Now - nowDate;
+            //Console.WriteLine($"执行{loop}次, 共计用时: {span.TotalSeconds}秒, 平均用时: {(span.TotalMilliseconds / loop)}毫秒");
             Console.Read();
         }
         static void Invoke(IDemo demo, UserInfo userInfo, DemoModel data)
         {
             try
             {
+                userInfo.UserName += "_c";
                 demo.Create(data, userInfo);
             }
             catch (ActionForbiddenException e)
@@ -60,6 +63,7 @@ namespace DemoSystem
 
             try
             {
+                userInfo.UserName += "_e";
                 data.Message = "修改调用验证";
                 demo.Modified(data, userInfo);
             }
@@ -70,6 +74,7 @@ namespace DemoSystem
 
             try
             {
+                userInfo.UserName += "_d";
                 demo.Delete(data.PrimaryKey, userInfo);
             }
             catch (ActionForbiddenException e)

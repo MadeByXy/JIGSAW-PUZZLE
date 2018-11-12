@@ -1,5 +1,4 @@
-﻿using RegistryLibrary.Event;
-using RegistryLibrary.Interface.Common;
+﻿using RegistryLibrary.Interface.Common;
 
 namespace RegistryLibrary.Interface.Event
 {

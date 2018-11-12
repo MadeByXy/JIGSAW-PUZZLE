@@ -12,6 +12,11 @@ namespace RegistryLibrary.Event
     /// <typeparam name="T2">消息类型2</typeparam>
     public class InternalEvent<T1, T2> : IEvent<T1, T2>
     {
+        /// <summary>
+        /// 依赖于本地逻辑的事件模块
+        /// </summary>
+        public InternalEvent() { }
+
         private event Func<T1, T2, Result> Events;
 
         /// <summary>
@@ -20,11 +25,11 @@ namespace RegistryLibrary.Event
         /// <param name="callback">回调方法</param>
         public void Subscribe(Action<T1, T2> callback)
         {
-            Events += new Func<T1, T2, Result>((data1, data2) =>
+            Events += (data1, data2) =>
             {
                 callback(data1, data2);
                 return new Result { Success = true };
-            });
+            };
         }
 
         /// <summary>
@@ -35,7 +40,6 @@ namespace RegistryLibrary.Event
         {
             Events += callback;
         }
-
 
         /// <summary>
         /// 订阅消息

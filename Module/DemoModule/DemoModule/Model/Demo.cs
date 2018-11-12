@@ -1,11 +1,10 @@
 ﻿using RegistryLibrary.AppModule;
-using RegistryLibrary.Exception;
 using RegistryLibrary.Event;
+using RegistryLibrary.Exception;
 using RegistryLibrary.ImplementsClass;
 using RegistryLibrary.Interface.Common;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace DemoModule.Model
@@ -17,13 +16,16 @@ namespace DemoModule.Model
     {
         public Demo()
         {
-            PrepareCreatedEvent = new MessageEvent<DemoModel, UserInfo>("Demo_PrepareCreatedEvent", InjectionModule.MessageQueue);
+            PrepareCreatedEvent = new InternalEvent<DemoModel, UserInfo>();
+            //PrepareCreatedEvent = new MessageEvent<DemoModel, UserInfo>("Demo_PrepareCreatedEvent", InjectionModule.MessageQueue);
             CreatedEvent = new MessageEvent<DemoModel, UserInfo>("Demo_CreatedEvent", InjectionModule.MessageQueue);
 
-            PrepareModifiedEvent = new MessageEvent<DemoModel, UserInfo>("Demo_PrepareModifiedEvent", InjectionModule.MessageQueue);
+            PrepareModifiedEvent = new InternalEvent<DemoModel, UserInfo>(); 
+            //PrepareModifiedEvent = new MessageEvent<DemoModel, UserInfo>("Demo_PrepareModifiedEvent", InjectionModule.MessageQueue);
             ModifiedEvent = new MessageEvent<DemoModel, UserInfo>("Demo_ModifiedEvent", InjectionModule.MessageQueue);
 
-            PrepareDeleteEvent = new MessageEvent<DemoModel, UserInfo>("Demo_PrepareDeleteEvent", InjectionModule.MessageQueue);
+            PrepareDeleteEvent = new InternalEvent<DemoModel, UserInfo>();
+            //PrepareDeleteEvent = new MessageEvent<DemoModel, UserInfo>("Demo_PrepareDeleteEvent", InjectionModule.MessageQueue);
             DeleteEvent = new MessageEvent<DemoModel, UserInfo>("Demo_DeleteEvent", InjectionModule.MessageQueue);
 
             //注入消息队列
@@ -46,7 +48,7 @@ namespace DemoModule.Model
 
             CreatedEvent.Subscribe((DemoModel data, UserInfo userInfo) =>
             {
-                Console.WriteLine($"创建结束监听成功, 创建人：{userInfo.UserName}, 附加消息:{data.Message}");
+                Console.WriteLine($"创建结束监听成功1, 创建人：{userInfo.UserName}, 附加消息:{data.Message}");
             });
 
             PrepareModifiedEvent.Subscribe((DemoModel data, UserInfo userInfo) =>
