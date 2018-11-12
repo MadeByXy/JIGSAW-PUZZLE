@@ -1,17 +1,17 @@
 ﻿using RegistryLibrary.BasicModule;
 using RegistryLibrary.Interface.Common;
+using RegistryLibrary.Interface.Event;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace RegistryLibrary.ImplementsClass
+namespace RegistryLibrary.Event
 {
     /// <summary>
-    /// 消息队列Event
+    /// 依赖于消息队列的事件模块
     /// </summary>
     /// <typeparam name="T1">消息类型1</typeparam>
     /// <typeparam name="T2">消息类型2</typeparam>
-    public class MessageEvent<T1, T2>
+    public class MessageEvent<T1, T2> : IEvent<T1, T2>
     {
         /// <summary>
         /// 实例化<see cref="MessageEvent{T1, T2}"/>
@@ -22,7 +22,6 @@ namespace RegistryLibrary.ImplementsClass
         {
             QueueName = queueName;
             MessageQueue = messageQueue;
-            //MessageQueue.QueueDeclare(queueName);
         }
 
         /// <summary>
@@ -38,15 +37,36 @@ namespace RegistryLibrary.ImplementsClass
         /// <summary>
         /// 订阅消息
         /// </summary>
+        /// <param name="callback">回调方法</param>
+        public void Subscribe(Action<T1, T2> callback)
+        {
+            MessageQueue.Subscribe(QueueName, new Action<MessageEventData<T1, T2>>((data) =>
+            {
+                callback(data.Data1, data.Date2);
+            }));
+        }
+
+        /// <summary>
+        /// 订阅消息
+        /// </summary>
+        /// <param name="callback">回调方法</param>
+        public void Subscribe(Func<T1, T2, Result> callback)
+        {
+            MessageQueue.Subscribe(QueueName, new Func<MessageEventData<T1, T2>, Result>((data) =>
+            {
+                return callback(data.Data1, data.Date2);
+            }));
+        }
+
+        /// <summary>
+        /// 订阅消息
+        /// </summary>
         /// <param name="message">事件内容</param>
         /// <param name="callback">订阅方法</param>
         /// <returns></returns>
         public static MessageEvent<T1, T2> operator +(MessageEvent<T1, T2> message, Func<T1, T2, Result> callback)
         {
-            message.MessageQueue.Subscribe(message.QueueName, new Func<MessageEventData<T1, T2>, Result>((data) =>
-            {
-                return callback(data.Data1, data.Date2);
-            }));
+            message.Subscribe(callback);
             return message;
         }
 
@@ -58,10 +78,7 @@ namespace RegistryLibrary.ImplementsClass
         /// <returns></returns>
         public static MessageEvent<T1, T2> operator +(MessageEvent<T1, T2> message, Action<T1, T2> callback)
         {
-            message.MessageQueue.Subscribe(message.QueueName, new Action<MessageEventData<T1, T2>>((data) =>
-            {
-                callback(data.Data1, data.Date2);
-            }));
+            message.Subscribe(callback);
             return message;
         }
 
@@ -81,7 +98,7 @@ namespace RegistryLibrary.ImplementsClass
         /// <param name="data1">消息1</param>
         /// <param name="data2">消息2</param>
         /// <returns>订阅者的回复结果</returns>
-        public async Task<List<Result>> InvokeAsync(T1 data1, T2 data2)
+        public async Task<Result> InvokeAsync(T1 data1, T2 data2)
         {
             return await MessageQueue.PublishAsync(QueueName, new MessageEventData<T1, T2> { Data1 = data1, Date2 = data2 });
         }

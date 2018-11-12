@@ -38,7 +38,6 @@ namespace MessageQueueModule.Model
         {
             Connection = Instance.Connection;
             Channel = Connection.CreateModel();
-            Channel.ContinuationTimeout = new TimeSpan(0, 0, 1);
 
             const string queueName = "rpc_channel";
             QueueDeclare(queueName);
@@ -156,17 +155,16 @@ namespace MessageQueueModule.Model
         /// <param name="queueName">队列名称</param>
         /// <param name="data">消息主体</param>
         /// <returns>订阅者的回复结果</returns>
-        public async Task<List<Result>> PublishAsync<T>(string queueName, T data)
+        public async Task<Result> PublishAsync<T>(string queueName, T data)
         {
             return await Task.Run(() =>
             {
-                var resultList = new List<Result>();
+                Result returnResult = null;
                 Publish(queueName, data, new Action<Result>((result) =>
                 {
-                    resultList.Add(result);
+                    returnResult = result;
                 }));
-
-                return resultList;
+                return returnResult;
             });
         }
 

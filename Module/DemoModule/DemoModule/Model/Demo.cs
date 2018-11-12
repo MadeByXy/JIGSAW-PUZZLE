@@ -1,5 +1,6 @@
 ﻿using RegistryLibrary.AppModule;
 using RegistryLibrary.Exception;
+using RegistryLibrary.Event;
 using RegistryLibrary.ImplementsClass;
 using RegistryLibrary.Interface.Common;
 using System;
@@ -113,10 +114,9 @@ namespace DemoModule.Model
         public DemoModel Create(DemoModel data, UserInfo userInfo)
         {
             var result = PrepareCreatedEvent?.InvokeAsync(data, userInfo).Result;
-            var error = result.FirstOrDefault(item => !item.Success);
-            if (!(error?.Success ?? true))
+            if (!(result?.Success ?? true))
             {
-                throw new ActionForbiddenException(error.Message);
+                throw new ActionForbiddenException(result.Message);
             }
 
             Console.WriteLine("创建成功");
@@ -129,10 +129,9 @@ namespace DemoModule.Model
         {
             var data = Detail(primaryKey, userInfo);
             var result = PrepareDeleteEvent?.InvokeAsync(data, userInfo).Result;
-            var error = result.FirstOrDefault(item => !item.Success);
-            if (!(error?.Success ?? true))
+            if (!(result?.Success ?? true))
             {
-                throw new ActionForbiddenException(error.Message);
+                throw new ActionForbiddenException(result.Message);
             }
 
             Console.WriteLine("删除成功");
@@ -148,10 +147,9 @@ namespace DemoModule.Model
         public DemoModel Modified(DemoModel data, UserInfo userInfo)
         {
             var result = PrepareModifiedEvent?.InvokeAsync(data, userInfo).Result;
-            var error = result.FirstOrDefault(item => !item.Success);
-            if (!(error?.Success ?? true))
+            if (!(result?.Success ?? true))
             {
-                throw new ActionForbiddenException(error.Message);
+                throw new ActionForbiddenException(result.Message);
             }
 
             Console.WriteLine("修改成功");

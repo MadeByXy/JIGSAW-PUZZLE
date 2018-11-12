@@ -1,4 +1,4 @@
-﻿namespace RegistryLibrary.ImplementsClass
+﻿namespace RegistryLibrary.Event
 {
     public class MessageEventData<T1, T2>
     {

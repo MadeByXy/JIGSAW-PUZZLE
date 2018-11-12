@@ -41,6 +41,6 @@ namespace RegistryLibrary.BasicModule
         /// <param name="queueName">队列名称</param>
         /// <param name="data">消息主体</param>
         /// <returns>订阅者的回复结果</returns>
-        Task<List<Result>> PublishAsync<T>(string queueName, T data);
+        Task<Result> PublishAsync<T>(string queueName, T data);
     }
 }

@@ -1,14 +1,16 @@
 ﻿using RegistryLibrary.BasicModule;
 using RegistryLibrary.Interface.Common;
+using RegistryLibrary.Interface.Event;
 using System;
+using System.Threading.Tasks;
 
-namespace RegistryLibrary.ImplementsClass
+namespace RegistryLibrary.Event
 {
     /// <summary>
-    /// 消息队列Event
+    /// 依赖于消息队列的事件模块
     /// </summary>
     /// <typeparam name="T">消息类型</typeparam>
-    public class MessageEvent<T>
+    public class MessageEvent<T> : IEvent<T>
     {
         /// <summary>
         /// 实例化<see cref="MessageEvent{T}"/>
@@ -62,6 +64,16 @@ namespace RegistryLibrary.ImplementsClass
         public void Invoke(T data)
         {
             MessageQueue.Publish(QueueName, data);
+        }
+
+        /// <summary>
+        /// 发布消息
+        /// </summary>
+        /// <param name="data">消息</param>
+        /// <returns>订阅者的回复结果</returns>
+        public async Task<Result> InvokeAsync(T data)
+        {
+            return await MessageQueue.PublishAsync(QueueName, data);
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using RegistryLibrary.AppModule;
-using RegistryLibrary.ImplementsClass;
+using RegistryLibrary.Event;
 using RegistryLibrary.Interface.Common;
-using System;
 
 namespace DemoModule.Model
 {

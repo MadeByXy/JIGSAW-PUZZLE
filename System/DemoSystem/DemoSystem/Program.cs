@@ -37,6 +37,18 @@ namespace DemoSystem
             var userInfo = new UserInfo { UserId = "test", UserName = "test_user" };
             var data = new DemoModel { PrimaryKey = 10, Message = "系统调用验证" };
 
+            var nowDate = DateTime.Now;
+            var loop = 1;
+            for (var i = 0; i < loop; i++)
+            {
+                Invoke(demo, userInfo, data);
+            }
+            var span = DateTime.Now - nowDate;
+            Console.WriteLine($"执行{loop}次, 共计用时: {span.TotalSeconds}秒, 平均用时: {(span.TotalMilliseconds / loop)}毫秒");
+            Console.Read();
+        }
+        static void Invoke(IDemo demo, UserInfo userInfo, DemoModel data)
+        {
             try
             {
                 demo.Create(data, userInfo);
@@ -64,7 +76,6 @@ namespace DemoSystem
             {
                 Console.WriteLine($"删除执行失败：{(e.InnerException ?? e).Message}");
             }
-            Console.Read();
         }
     }
 }

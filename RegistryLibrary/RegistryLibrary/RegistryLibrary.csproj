@@ -54,17 +54,21 @@
     <Compile Include="BasicModule\ILogging.cs" />
     <Compile Include="BasicModule\IMessageQueue.cs" />
     <Compile Include="BasicModule\IUploadFile.cs" />
+    <Compile Include="Event\InternalEvent.2.cs">
+      <DependentUpon>InternalEvent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Event\InternalEvent.cs" />
     <Compile Include="Exception\ActionForbiddenException.cs" />
     <Compile Include="Helper\DataTableHelper.cs" />
     <Compile Include="Helper\ExtendsHelper.cs" />
     <Compile Include="Helper\InjectionHelper.cs" />
     <Compile Include="Helper\SerializationHelper.cs" />
     <Compile Include="ImplementsClass\ApiResult.cs" />
-    <Compile Include="ImplementsClass\MessageEvent.2.cs">
+    <Compile Include="Event\MessageEvent.2.cs">
       <DependentUpon>MessageEvent.cs</DependentUpon>
     </Compile>
-    <Compile Include="ImplementsClass\MessageEvent.cs" />
-    <Compile Include="ImplementsClass\MessageEventData.cs">
+    <Compile Include="Event\MessageEvent.cs" />
+    <Compile Include="Event\MessageEventData.cs">
       <DependentUpon>MessageEvent.cs</DependentUpon>
     </Compile>
     <Compile Include="Interface\Action\IBatchDeleteAction.cs" />
@@ -98,6 +102,8 @@
     <Compile Include="Interface\Dependence\IInjection.cs" />
     <Compile Include="Interface\Event\ICreateEvent.cs" />
     <Compile Include="Interface\Event\IDeleteEvent.cs" />
+    <Compile Include="Interface\Event\IEvent.2.cs" />
+    <Compile Include="Interface\Event\IEvent.cs" />
     <Compile Include="Interface\Event\IModifiedEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

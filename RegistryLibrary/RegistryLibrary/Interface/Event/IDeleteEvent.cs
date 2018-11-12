@@ -1,6 +1,5 @@
-﻿using RegistryLibrary.ImplementsClass;
+﻿using RegistryLibrary.Event;
 using RegistryLibrary.Interface.Common;
-using System;
 
 namespace RegistryLibrary.Interface.Event
 {
