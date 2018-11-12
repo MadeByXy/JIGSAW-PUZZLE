@@ -14,25 +14,25 @@ namespace RegistryLibrary.Interface.Event
         /// 订阅消息
         /// </summary>
         /// <param name="callback">回调方法</param>
-        void Subscribe(Action<T> callback);
+        IEvent<T> Subscribe(Action<T> callback);
 
         /// <summary>
         /// 订阅消息
         /// </summary>
         /// <param name="callback">回调方法</param>
-        void Subscribe(Func<T, Result> callback);
+        IEvent<T> Subscribe(Func<T, Result> callback);
 
         /// <summary>
         /// 发布消息
         /// </summary>
         /// <param name="data">消息内容</param>
-        void Invoke(T data);
+        void Publish(T data);
 
         /// <summary>
         /// 发布消息
         /// </summary>
         /// <param name="data">消息</param>
         /// <returns>订阅者的回复结果</returns>
-        Task<Result> InvokeAsync(T data);
+        Task<Result> PublishAsync(T data);
     }
 }

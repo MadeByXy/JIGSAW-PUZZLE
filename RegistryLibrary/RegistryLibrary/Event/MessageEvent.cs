@@ -37,49 +37,27 @@ namespace RegistryLibrary.Event
         /// 订阅消息
         /// </summary>
         /// <param name="callback">回调方法</param>
-        public void Subscribe(Action<T> callback)
+        public IEvent<T> Subscribe(Action<T> callback)
         {
             MessageQueue.Subscribe(QueueName, callback);
+            return this;
         }
 
         /// <summary>
         /// 订阅消息
         /// </summary>
         /// <param name="callback">回调方法</param>
-        public void Subscribe(Func<T, Result> callback)
+        public IEvent<T> Subscribe(Func<T, Result> callback)
         {
             MessageQueue.Subscribe(QueueName, callback);
-        }
-
-        /// <summary>
-        /// 订阅消息
-        /// </summary>
-        /// <param name="message">事件内容</param>
-        /// <param name="callback">订阅方法</param>
-        /// <returns></returns>
-        public static MessageEvent<T> operator +(MessageEvent<T> message, Func<T, Result> callback)
-        {
-            message.Subscribe(callback);
-            return message;
-        }
-
-        /// <summary>
-        /// 订阅消息
-        /// </summary>
-        /// <param name="message">事件内容</param>
-        /// <param name="callback">订阅方法</param>
-        /// <returns></returns>
-        public static MessageEvent<T> operator +(MessageEvent<T> message, Action<T> callback)
-        {
-            message.Subscribe(callback);
-            return message;
+            return this;
         }
 
         /// <summary>
         /// 发布消息
         /// </summary>
         /// <param name="data">消息内容</param>
-        public void Invoke(T data)
+        public void Publish(T data)
         {
             MessageQueue.Publish(QueueName, data);
         }
@@ -89,7 +67,7 @@ namespace RegistryLibrary.Event
         /// </summary>
         /// <param name="data">消息</param>
         /// <returns>订阅者的回复结果</returns>
-        public async Task<Result> InvokeAsync(T data)
+        public async Task<Result> PublishAsync(T data)
         {
             return await MessageQueue.PublishAsync(QueueName, data);
         }

@@ -38,48 +38,26 @@ namespace RegistryLibrary.Event
         /// 订阅消息
         /// </summary>
         /// <param name="callback">回调方法</param>
-        public void Subscribe(Action<T1, T2> callback)
+        public IEvent<T1, T2> Subscribe(Action<T1, T2> callback)
         {
             MessageQueue.Subscribe(QueueName, (MessageEventData<T1, T2> data) =>
             {
                 callback(data.Data1, data.Date2);
             });
+            return this;
         }
 
         /// <summary>
         /// 订阅消息
         /// </summary>
         /// <param name="callback">回调方法</param>
-        public void Subscribe(Func<T1, T2, Result> callback)
+        public IEvent<T1, T2> Subscribe(Func<T1, T2, Result> callback)
         {
             MessageQueue.Subscribe(QueueName, (MessageEventData<T1, T2> data) =>
             {
                 return callback(data.Data1, data.Date2);
             });
-        }
-
-        /// <summary>
-        /// 订阅消息
-        /// </summary>
-        /// <param name="message">事件内容</param>
-        /// <param name="callback">订阅方法</param>
-        /// <returns></returns>
-        public static MessageEvent<T1, T2> operator +(MessageEvent<T1, T2> message, Func<T1, T2, Result> callback)
-        {
-            message.Subscribe(callback);
-            return message;
-        }
-
-        /// <summary>
-        /// 订阅消息
-        /// </summary>
-        /// <param name="message">事件内容</param>
-        /// <param name="callback">订阅方法</param>
-        /// <returns></returns>
-        public static MessageEvent<T1, T2> operator +(MessageEvent<T1, T2> message, Action<T1, T2> callback)
-        {
-            message.Subscribe(callback);
-            return message;
+            return this;
         }
 
         /// <summary>
@@ -87,7 +65,7 @@ namespace RegistryLibrary.Event
         /// </summary>
         /// <param name="data1">消息1</param>
         /// <param name="data2">消息2</param>
-        public void Invoke(T1 data1, T2 data2)
+        public void Publish(T1 data1, T2 data2)
         {
             MessageQueue.Publish(QueueName, new MessageEventData<T1, T2> { Data1 = data1, Date2 = data2 });
         }
@@ -98,7 +76,7 @@ namespace RegistryLibrary.Event
         /// <param name="data1">消息1</param>
         /// <param name="data2">消息2</param>
         /// <returns>订阅者的回复结果</returns>
-        public async Task<Result> InvokeAsync(T1 data1, T2 data2)
+        public async Task<Result> PublishAsync(T1 data1, T2 data2)
         {
             return await MessageQueue.PublishAsync(QueueName, new MessageEventData<T1, T2> { Data1 = data1, Date2 = data2 });
         }

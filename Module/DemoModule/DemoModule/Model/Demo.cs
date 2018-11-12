@@ -33,9 +33,7 @@ namespace DemoModule.Model
             {
                 Console.WriteLine($"预创建验证监听失败测试, 创建人：{userInfo.UserName}, 附加消息:{data.Message}");
                 return new ApiResult<DBNull, DBNull> { Success = true, Message = "测试通过" };
-            });
-
-            PrepareCreatedEvent.Subscribe((DemoModel data, UserInfo userInfo) =>
+            }).Subscribe((DemoModel data, UserInfo userInfo) =>
             {
                 Console.WriteLine($"预创建验证监听成功2, 创建人：{userInfo.UserName}, 附加消息:{data.Message}");
                 return new ApiResult<DBNull, DBNull> { Success = true, Message = "测试通过" };
@@ -44,9 +42,7 @@ namespace DemoModule.Model
             CreatedEvent.Subscribe((DemoModel data, UserInfo userInfo) =>
             {
                 Console.WriteLine($"创建结束监听成功, 创建人：{userInfo.UserName}, 附加消息:{data.Message}");
-            });
-
-            CreatedEvent.Subscribe((DemoModel data, UserInfo userInfo) =>
+            }).Subscribe((DemoModel data, UserInfo userInfo) =>
             {
                 Console.WriteLine($"创建结束监听成功1, 创建人：{userInfo.UserName}, 附加消息:{data.Message}");
             });
@@ -115,7 +111,7 @@ namespace DemoModule.Model
 
         public DemoModel Create(DemoModel data, UserInfo userInfo)
         {
-            var result = PrepareCreatedEvent?.InvokeAsync(data, userInfo).Result;
+            var result = PrepareCreatedEvent?.PublishAsync(data, userInfo).Result;
             if (!(result?.Success ?? true))
             {
                 throw new ActionForbiddenException(result.Message);
@@ -123,14 +119,14 @@ namespace DemoModule.Model
 
             Console.WriteLine("创建成功");
 
-            CreatedEvent?.Invoke(data, userInfo);
+            CreatedEvent?.Publish(data, userInfo);
             return data;
         }
 
         public void Delete(int primaryKey, UserInfo userInfo)
         {
             var data = Detail(primaryKey, userInfo);
-            var result = PrepareDeleteEvent?.InvokeAsync(data, userInfo).Result;
+            var result = PrepareDeleteEvent?.PublishAsync(data, userInfo).Result;
             if (!(result?.Success ?? true))
             {
                 throw new ActionForbiddenException(result.Message);
@@ -138,7 +134,7 @@ namespace DemoModule.Model
 
             Console.WriteLine("删除成功");
 
-            DeleteEvent?.Invoke(data, userInfo);
+            DeleteEvent?.Publish(data, userInfo);
         }
 
         public DemoModel Detail(int primaryKey, UserInfo userInfo)
@@ -148,7 +144,7 @@ namespace DemoModule.Model
 
         public DemoModel Modified(DemoModel data, UserInfo userInfo)
         {
-            var result = PrepareModifiedEvent?.InvokeAsync(data, userInfo).Result;
+            var result = PrepareModifiedEvent?.PublishAsync(data, userInfo).Result;
             if (!(result?.Success ?? true))
             {
                 throw new ActionForbiddenException(result.Message);
@@ -156,7 +152,7 @@ namespace DemoModule.Model
 
             Console.WriteLine("修改成功");
 
-            ModifiedEvent?.Invoke(data, userInfo);
+            ModifiedEvent?.Publish(data, userInfo);
             return data;
         }
     }

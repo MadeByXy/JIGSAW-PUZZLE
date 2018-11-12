@@ -22,22 +22,24 @@ namespace RegistryLibrary.Event
         /// 订阅消息
         /// </summary>
         /// <param name="callback">回调方法</param>
-        public void Subscribe(Action<T> callback)
+        public IEvent<T> Subscribe(Action<T> callback)
         {
             Events += (data) =>
             {
                 callback(data);
                 return new Result { Success = true };
             };
+            return this;
         }
 
         /// <summary>
         /// 订阅消息
         /// </summary>
         /// <param name="callback">回调方法</param>
-        public void Subscribe(Func<T, Result> callback)
+        public IEvent<T> Subscribe(Func<T, Result> callback)
         {
             Events += callback;
+            return this;
         }
 
         /// <summary>
@@ -68,7 +70,7 @@ namespace RegistryLibrary.Event
         /// 发布消息
         /// </summary>
         /// <param name="data">消息内容</param>
-        public void Invoke(T data)
+        public void Publish(T data)
         {
             Events?.Invoke(data);
         }
@@ -78,7 +80,7 @@ namespace RegistryLibrary.Event
         /// </summary>
         /// <param name="data">消息内容</param>
         /// <returns>回复结果</returns>
-        public async Task<Result> InvokeAsync(T data)
+        public async Task<Result> PublishAsync(T data)
         {
             return await Task.Run(() =>
             {
