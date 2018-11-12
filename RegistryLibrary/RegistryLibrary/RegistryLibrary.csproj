@@ -102,7 +102,9 @@
     <Compile Include="Interface\Dependence\IInjection.cs" />
     <Compile Include="Interface\Event\ICreateEvent.cs" />
     <Compile Include="Interface\Event\IDeleteEvent.cs" />
-    <Compile Include="Interface\Event\IEvent.2.cs" />
+    <Compile Include="Interface\Event\IEvent.2.cs">
+      <DependentUpon>IEvent.cs</DependentUpon>
+    </Compile>
     <Compile Include="Interface\Event\IEvent.cs" />
     <Compile Include="Interface\Event\IModifiedEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
