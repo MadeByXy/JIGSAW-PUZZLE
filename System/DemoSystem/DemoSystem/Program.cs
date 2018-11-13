@@ -44,6 +44,19 @@ namespace DemoSystem
 
             Console.WriteLine(RedisHelper.Get<string>(userInfo, "测试").Result);
             Console.WriteLine(RedisHelper.Get<UserInfo>("测试").Result.UserId);
+
+            var channel = "test";
+            RedisHelper.Subscribe(channel, (string value) =>
+            {
+                Console.WriteLine(value);
+            });
+
+            RedisHelper.Subscribe(channel, (string value) =>
+            {
+                Console.WriteLine($"第二个订阅者：{value}");
+            });
+
+            RedisHelper.Publish(channel, "我通过redis发布了一条数据");
             //var nowDate = DateTime.Now;
             //var loop = 1;
             //for (var i = 0; i < loop; i++)

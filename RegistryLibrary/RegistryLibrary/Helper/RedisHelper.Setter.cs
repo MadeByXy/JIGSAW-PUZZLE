@@ -55,5 +55,16 @@ namespace RegistryLibrary.Helper
         {
             await PublicDatabase.StringSetAsync(GetKey(key), value.ToSerialization(), span);
         }
+
+        /// <summary>
+        /// 发布数据
+        /// </summary>
+        /// <typeparam name="T">数据类型</typeparam>
+        /// <param name="channelName">频道名称</param>
+        /// <param name="data">待发布数据</param>
+        public static void Publish<T>(string channelName, T data)
+        {
+            PublicDatabase.PublishAsync(channelName, data.ToSerialization());
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using RegistryLibrary.Interface.Common;
 using StackExchange.Redis;
+using System;
 using System.Threading.Tasks;
 
 namespace RegistryLibrary.Helper
@@ -46,6 +47,20 @@ namespace RegistryLibrary.Helper
             {
                 return ((byte[])data).FromSerialization<T>();
             }
+        }
+
+        /// <summary>
+        /// 订阅数据
+        /// </summary>
+        /// <typeparam name="T">数据类型</typeparam>
+        /// <param name="channelName">订阅频道</param>
+        /// <param name="callback">回调方法</param>
+        public static void Subscribe<T>(string channelName, Action<T> callback)
+        {
+            Subscriber.Subscribe(channelName, (channel, data) =>
+            {
+                callback?.Invoke(((byte[])data).FromSerialization<T>());
+            });
         }
     }
 }

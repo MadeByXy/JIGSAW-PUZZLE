@@ -19,6 +19,7 @@ namespace RegistryLibrary.Helper
         /// </summary>
         private static IDatabase PrivateDatabase { get; set; }
 
+        private static ISubscriber Subscriber { get; set; }
         /// <summary>
         /// 缓存过期时间
         /// </summary>
@@ -39,6 +40,7 @@ namespace RegistryLibrary.Helper
             var redis = ConnectionMultiplexer.Connect($"{RedisHost},password={RedisPassWord}");
             PublicDatabase = redis.GetDatabase(4);
             PrivateDatabase = redis.GetDatabase(5);
+            Subscriber = redis.GetSubscriber();
         }
 
         /// <summary>
