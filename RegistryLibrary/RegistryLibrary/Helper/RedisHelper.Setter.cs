@@ -62,9 +62,9 @@ namespace RegistryLibrary.Helper
         /// <typeparam name="T">数据类型</typeparam>
         /// <param name="channelName">频道名称</param>
         /// <param name="data">待发布数据</param>
-        public static void Publish<T>(string channelName, T data)
+        public static async void Publish<T>(string channelName, T data)
         {
-            PublicDatabase.PublishAsync(channelName, data.ToSerialization());
+            await PublicDatabase.PublishAsync(channelName, data.ToSerialization());
         }
     }
 }
