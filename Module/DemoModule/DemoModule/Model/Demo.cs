@@ -17,16 +17,16 @@ namespace DemoModule.Model
         public Demo()
         {
             PrepareCreatedEvent = new InternalEvent<DemoModel, UserInfo>();
-            //PrepareCreatedEvent = new MessageEvent<DemoModel, UserInfo>("Demo_PrepareCreatedEvent", InjectionModule.MessageQueue);
-            CreatedEvent = new MessageEvent<DemoModel, UserInfo>("Demo_CreatedEvent", InjectionModule.MessageQueue);
+            //PrepareCreatedEvent = new MessageEvent<DemoModel, UserInfo>("Demo.PrepareCreatedEvent", InjectionModule.MessageQueue);
+            CreatedEvent = new MessageEvent<DemoModel, UserInfo>("Demo.CreatedEvent", InjectionModule.MessageQueue);
 
             PrepareModifiedEvent = new InternalEvent<DemoModel, UserInfo>(); 
-            //PrepareModifiedEvent = new MessageEvent<DemoModel, UserInfo>("Demo_PrepareModifiedEvent", InjectionModule.MessageQueue);
-            ModifiedEvent = new MessageEvent<DemoModel, UserInfo>("Demo_ModifiedEvent", InjectionModule.MessageQueue);
+            //PrepareModifiedEvent = new MessageEvent<DemoModel, UserInfo>("Demo.PrepareModifiedEvent", InjectionModule.MessageQueue);
+            ModifiedEvent = new MessageEvent<DemoModel, UserInfo>("Demo.ModifiedEvent", InjectionModule.MessageQueue);
 
             PrepareDeleteEvent = new InternalEvent<DemoModel, UserInfo>();
-            //PrepareDeleteEvent = new MessageEvent<DemoModel, UserInfo>("Demo_PrepareDeleteEvent", InjectionModule.MessageQueue);
-            DeleteEvent = new MessageEvent<DemoModel, UserInfo>("Demo_DeleteEvent", InjectionModule.MessageQueue);
+            //PrepareDeleteEvent = new MessageEvent<DemoModel, UserInfo>("Demo.PrepareDeleteEvent", InjectionModule.MessageQueue);
+            DeleteEvent = new MessageEvent<DemoModel, UserInfo>("Demo.DeleteEvent", InjectionModule.MessageQueue);
 
             //注入消息队列
             PrepareCreatedEvent.Subscribe((DemoModel data, UserInfo userInfo) =>
