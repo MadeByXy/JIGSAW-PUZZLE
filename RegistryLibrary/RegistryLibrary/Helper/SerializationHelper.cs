@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
 using System.Text;
 
 namespace RegistryLibrary.Helper
@@ -27,7 +28,13 @@ namespace RegistryLibrary.Helper
         /// <returns></returns>
         public static T FromSerialization<T>(this byte[] bytes)
         {
-            return JsonConvert.DeserializeObject<T>(Encoding.UTF8.GetString(bytes));
+            switch (typeof(T).Name)
+            {
+                case nameof(String):
+                    return (T)(object)Encoding.UTF8.GetString(bytes);
+                default:
+                    return JsonConvert.DeserializeObject<T>(Encoding.UTF8.GetString(bytes));
+            }
         }
     }
 }

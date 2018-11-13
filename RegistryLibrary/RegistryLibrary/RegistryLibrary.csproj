@@ -38,9 +38,14 @@
       <HintPath>..\..\Module\FileModule\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="StackExchange.Redis, Version=1.2.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\System\DemoSystem\packages\StackExchange.Redis.1.2.6\lib\net45\StackExchange.Redis.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -62,6 +67,13 @@
     <Compile Include="Helper\DataTableHelper.cs" />
     <Compile Include="Helper\ExtendsHelper.cs" />
     <Compile Include="Helper\InjectionHelper.cs" />
+    <Compile Include="Helper\RedisHelper.cs" />
+    <Compile Include="Helper\RedisHelper.Getter.cs">
+      <DependentUpon>RedisHelper.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\RedisHelper.Setter.cs">
+      <DependentUpon>RedisHelper.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helper\SerializationHelper.cs" />
     <Compile Include="ImplementsClass\ApiResult.cs" />
     <Compile Include="Event\MessageEvent.2.cs">
@@ -109,7 +121,9 @@
     <Compile Include="Interface\Event\IModifiedEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

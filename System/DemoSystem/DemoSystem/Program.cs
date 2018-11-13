@@ -39,6 +39,11 @@ namespace DemoSystem
 
             Invoke(demo, userInfo, data);
 
+            RedisHelper.Set("测试", new UserInfo { UserId = "测试", UserName = "测试" });
+            RedisHelper.Set(userInfo, "测试", "文字测试");
+
+            Console.WriteLine(RedisHelper.Get<string>(userInfo, "测试").Result);
+            Console.WriteLine(RedisHelper.Get<UserInfo>("测试").Result.UserId);
             //var nowDate = DateTime.Now;
             //var loop = 1;
             //for (var i = 0; i < loop; i++)
