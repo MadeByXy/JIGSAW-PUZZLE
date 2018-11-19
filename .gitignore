@@ -20,3 +20,6 @@
 /System/DemoSystem/DemoSystem/bin
 /System/DemoSystem/DemoSystem/obj
 /System/DemoSystem/packages
+/Module/WebSocketModule/packages
+/Module/WebSocketModule/WebSocketModule/bin
+/Module/WebSocketModule/WebSocketModule/obj

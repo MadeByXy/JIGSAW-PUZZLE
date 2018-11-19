@@ -1,9 +1,12 @@
-﻿namespace RegistryLibrary.ImplementsClass
+﻿using RegistryLibrary.Interface.Common;
+
+namespace RegistryLibrary.BasicModule
 {
     /// <summary>
-    /// WebSocket数据通信实体
+    /// WebSocket交互用数据结构
     /// </summary>
-    public class WebSocketData
+    /// <typeparam name="T">数据类型</typeparam>
+    public class WebSocketModel<T>
     {
         /// <summary>
         /// 本次会话的唯一标识
@@ -12,9 +15,14 @@
         public string Seed { get; set; }
 
         /// <summary>
+        /// 指示本次会话的用户名称
+        /// </summary>
+        public UserInfo UserInfo { get; set; } = new UserInfo { UserId = "admin" };
+
+        /// <summary>
         /// 访问类型
         /// </summary>
-        public WebSocketDataEnum Type { get; set; }
+        public WebSocketTypeEnum Type { get; set; }
 
         /// <summary>
         /// 发送频道
@@ -24,6 +32,6 @@
         /// <summary>
         /// 传递数据
         /// </summary>
-        public object Data { get; set; }
+        public T Data { get; set; }
     }
 }

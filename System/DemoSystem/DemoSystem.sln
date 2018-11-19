@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageQueueModule", "..\..
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggingModule", "..\..\Module\LoggingModule\LoggingModule\LoggingModule.csproj", "{49B70280-6329-466A-AF4D-BC335324E191}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSocketModule", "..\..\Module\WebSocketModule\WebSocketModule\WebSocketModule.csproj", "{A93D5A72-54A0-466A-AFC9-171A9801D1ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{49B70280-6329-466A-AF4D-BC335324E191}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49B70280-6329-466A-AF4D-BC335324E191}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49B70280-6329-466A-AF4D-BC335324E191}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A93D5A72-54A0-466A-AFC9-171A9801D1ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A93D5A72-54A0-466A-AFC9-171A9801D1ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A93D5A72-54A0-466A-AFC9-171A9801D1ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A93D5A72-54A0-466A-AFC9-171A9801D1ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -34,32 +34,12 @@
     <Reference Include="DysoftLib">
       <HintPath>..\..\CommonDLL\DysoftLib.dll</HintPath>
     </Reference>
-    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\..\System\DemoSystem\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\Module\FileModule\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="StackExchange.Redis, Version=1.2.6.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\System\DemoSystem\packages\StackExchange.Redis.1.2.6\lib\net45\StackExchange.Redis.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="SuperSocket.Common, Version=1.6.0.4, Culture=neutral, PublicKeyToken=6c80000676988ebb, processorArchitecture=MSIL">
-      <HintPath>..\..\System\DemoSystem\packages\SuperWebSocket.0.9.0.2\lib\net40\SuperSocket.Common.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="SuperSocket.SocketBase, Version=1.6.0.4, Culture=neutral, PublicKeyToken=6c80000676988ebb, processorArchitecture=MSIL">
-      <HintPath>..\..\System\DemoSystem\packages\SuperWebSocket.0.9.0.2\lib\net40\SuperSocket.SocketBase.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="SuperSocket.SocketEngine, Version=1.6.0.4, Culture=neutral, PublicKeyToken=6c80000676988ebb, processorArchitecture=MSIL">
-      <HintPath>..\..\System\DemoSystem\packages\SuperWebSocket.0.9.0.2\lib\net40\SuperSocket.SocketEngine.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="SuperWebSocket, Version=0.9.0.0, Culture=neutral, PublicKeyToken=7ba53b9a7cef5d1c, processorArchitecture=MSIL">
-      <HintPath>..\..\System\DemoSystem\packages\SuperWebSocket.0.9.0.2\lib\net40\SuperWebSocket.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -74,11 +54,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppModule\DemoModel.cs" />
+    <Compile Include="AppModule\DemoModel.cs">
+      <DependentUpon>IDemo.cs</DependentUpon>
+    </Compile>
     <Compile Include="AppModule\IDemo.cs" />
     <Compile Include="BasicModule\ILogging.cs" />
     <Compile Include="BasicModule\IMessageQueue.cs" />
     <Compile Include="BasicModule\IUploadFile.cs" />
+    <Compile Include="BasicModule\IWebSocket.cs" />
+    <Compile Include="BasicModule\WebSocketModel.cs">
+      <DependentUpon>IWebSocket.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BasicModule\WebSocketTypeEnum.cs">
+      <DependentUpon>IWebSocket.cs</DependentUpon>
+    </Compile>
     <Compile Include="Event\InternalEvent.2.cs">
       <DependentUpon>InternalEvent.cs</DependentUpon>
     </Compile>
@@ -95,7 +84,6 @@
       <DependentUpon>RedisHelper.cs</DependentUpon>
     </Compile>
     <Compile Include="Helper\SerializationHelper.cs" />
-    <Compile Include="Helper\WebSocketHelper.cs" />
     <Compile Include="ImplementsClass\ApiResult.cs" />
     <Compile Include="Event\MessageEvent.2.cs">
       <DependentUpon>MessageEvent.cs</DependentUpon>
@@ -103,10 +91,6 @@
     <Compile Include="Event\MessageEvent.cs" />
     <Compile Include="Event\MessageEventData.cs">
       <DependentUpon>MessageEvent.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ImplementsClass\WebSocketData.cs" />
-    <Compile Include="ImplementsClass\WebSocketDataEnum.cs">
-      <DependentUpon>WebSocketData.cs</DependentUpon>
     </Compile>
     <Compile Include="Interface\Action\IBatchDeleteAction.cs" />
     <Compile Include="Interface\Action\ICreateAction.cs" />

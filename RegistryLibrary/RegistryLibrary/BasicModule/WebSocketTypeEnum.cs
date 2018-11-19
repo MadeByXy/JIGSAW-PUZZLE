@@ -1,9 +1,9 @@
-﻿namespace RegistryLibrary.ImplementsClass
+﻿namespace RegistryLibrary.BasicModule
 {
     /// <summary>
     /// 传输类型枚举
     /// </summary>
-    public enum WebSocketDataEnum
+    public enum WebSocketTypeEnum
     {
         /// <summary>
         /// 提交数据并等待回复
