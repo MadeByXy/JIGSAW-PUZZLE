@@ -17,7 +17,7 @@ namespace RegistryLibrary.BasicModule
         /// <summary>
         /// 指示本次会话的用户名称
         /// </summary>
-        public UserInfo UserInfo { get; set; } = new UserInfo { UserId = "admin" };
+        public UserInfo UserInfo { get; set; } 
 
         /// <summary>
         /// 访问类型
