@@ -7,20 +7,21 @@ namespace WebApiModule
     {
         public void Configuration(IAppBuilder app)
         {
-            var webApiConfiguration = ConfigureWebApi();
-
             // Use the extension method provided by the WebApi.Owin library:
-            app.UseWebApi(webApiConfiguration);
+            app.UseWebApi(ConfigureWebApi);
         }
 
-        private HttpConfiguration ConfigureWebApi()
+        private HttpConfiguration ConfigureWebApi
         {
-            var config = new HttpConfiguration();
-            config.Routes.MapHttpRoute(
-                "DefaultApi",
-                "Api/{controller}/{id}",
-                new { id = RouteParameter.Optional });
-            return config;
+            get
+            {
+                var config = new HttpConfiguration();
+                config.Routes.MapHttpRoute(
+                    "DefaultApi",
+                    "Api/{controller}/{id}",
+                    new { id = RouteParameter.Optional });
+                return config;
+            }
         }
     }
 }
