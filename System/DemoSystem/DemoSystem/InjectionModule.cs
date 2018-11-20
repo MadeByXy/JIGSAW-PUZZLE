@@ -25,6 +25,8 @@ namespace DemoSystem
             new WebSocketModule.InjectionModule(messageQueue);
             WebSocketModule = new WebSocketModule.Model.WebSocket(4141);
 
+            new WebApiModule.InjectionModule("http://localhost:4142");
+
             DemoModule.PrepareDeleteEvent.Subscribe((DemoModel d, UserInfo u) =>
             {
                 Console.WriteLine("错误注入测试成功");

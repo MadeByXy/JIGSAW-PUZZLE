@@ -37,6 +37,10 @@
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Owin.Host.HttpListener, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.HttpListener.4.0.0\lib\net451\Microsoft.Owin.Host.HttpListener.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -87,6 +91,10 @@
     <ProjectReference Include="..\..\..\Module\MessageQueueModule\MessageQueueModule\MessageQueueModule.csproj">
       <Project>{B67DBB8E-8455-4A55-8D45-E37779034587}</Project>
       <Name>MessageQueueModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Module\WebApiModule\WebApiModule\WebApiModule.csproj">
+      <Project>{3578cfa3-d49e-4846-844c-b74100e14bd5}</Project>
+      <Name>WebApiModule</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Module\WebSocketModule\WebSocketModule\WebSocketModule.csproj">
       <Project>{a93d5a72-54a0-466a-afc9-171a9801d1ed}</Project>
