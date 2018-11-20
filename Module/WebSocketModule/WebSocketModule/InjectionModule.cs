@@ -6,6 +6,7 @@ namespace WebSocketModule
     /// <summary>
     /// 注册模块
     /// </summary>
+    /// <remarks>引用本项目的同时, 还应在System项目下下引用SuperWebSocket包, 否则会造成启动失败</remarks>
     public class InjectionModule : IInjection
     {
         public InjectionModule(IMessageQueue messageQueue)
