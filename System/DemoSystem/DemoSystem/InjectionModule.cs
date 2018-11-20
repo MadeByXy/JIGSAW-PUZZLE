@@ -14,25 +14,30 @@ namespace DemoSystem
     {
         public InjectionModule()
         {
+            //初始化日志模块
             var log = new Logging();
 
+            //初始化消息队列模块
             new MessageQueueModule.InjectionModule(log);
             var messageQueue = new MessageQueue();
 
-            new DemoModule.InjectionModule(messageQueue);
-            DemoModule = new Demo();
-
+            //初始化WebSocket模块
             new WebSocketModule.InjectionModule(messageQueue);
             WebSocketModule = new WebSocketModule.Model.WebSocket(4141);
 
+            //初始化WebApi模块
             new WebApiModule.InjectionModule("http://localhost:4142");
 
-            DemoModule.PrepareDeleteEvent.Subscribe((DemoModel d, UserInfo u) =>
+            //初始化demo模块
+            new DemoModule.InjectionModule(messageQueue);
+            DemoModule = new Demo();
+
+            //注入事件
+            DemoModule.PrepareDeleteEvent.Subscribe((DemoModel model, UserInfo user) =>
             {
                 Console.WriteLine("错误注入测试成功");
                 return new ApiResult<DBNull, DBNull> { Success = false, Message = "错误注入测试" };
             });
-
         }
 
         /// <summary>

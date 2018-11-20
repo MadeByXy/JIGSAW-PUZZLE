@@ -8,25 +8,6 @@ namespace DemoSystem
 {
     class Program
     {
-        //static void Main(string[] args)
-        //{
-        //    var message = MessageQueueModule.Model.MessageQueueModule.Instance;
-
-        //    const string queueName = "hello";
-        //    message.QueueDeclare(queueName);
-
-        //    message.Subscribe(queueName, new Func<string, bool>(data =>
-        //    {
-        //        Console.WriteLine("成功接收消息");
-        //        Console.WriteLine($"消息内容: {data}");
-        //        return true;
-        //    }));
-
-        //    message.Publish(queueName, "生产者成功发送消息");
-
-        //    Console.Read();
-        //}
-
         static void Main(string[] args)
         {
             new InjectionModule();
@@ -67,6 +48,7 @@ namespace DemoSystem
             //Console.WriteLine($"执行{loop}次, 共计用时: {span.TotalSeconds}秒, 平均用时: {(span.TotalMilliseconds / loop)}毫秒");
             Console.Read();
         }
+
         static void Invoke(IDemo demo, UserInfo userInfo, DemoModel data)
         {
             try
