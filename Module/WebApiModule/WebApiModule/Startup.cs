@@ -18,7 +18,7 @@ namespace WebApiModule
             var config = new HttpConfiguration();
             config.Routes.MapHttpRoute(
                 "DefaultApi",
-                "Api/{controller}/{action}",
+                "Api/{controller}/{id}",
                 new { id = RouteParameter.Optional });
             return config;
         }
