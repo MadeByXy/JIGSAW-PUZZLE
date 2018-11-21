@@ -7,6 +7,7 @@ using RegistryLibrary.ImplementsClass;
 using RegistryLibrary.Interface.Common;
 using RegistryLibrary.Interface.Dependence;
 using System;
+using TimingServiceModule.Model;
 
 namespace DemoSystem
 {
@@ -28,6 +29,14 @@ namespace DemoSystem
             //初始化WebApi模块
             new WebApiModule.InjectionModule("http://localhost:4142");
 
+            //初始化定时服务模块
+            var timingService = new TimingService();
+
+            //初始化Email模块
+            new EmailModule.InjectionModule("xy609284278@126.com", "xy10742581xy", "smtp.126.com", timingService);
+            //new EmailModule.InjectionModule("609284278@qq.com", "oljkxlpsihvobdjg", "smtp.qq.com", timingService);
+            EmailModule = new EmailModule.Model.Email();
+
             //初始化demo模块
             new DemoModule.InjectionModule(messageQueue);
             DemoModule = new Demo();
@@ -44,6 +53,11 @@ namespace DemoSystem
         /// Demo模块
         /// </summary>
         public static IDemo DemoModule { get; set; }
+
+        /// <summary>
+        /// Email模块
+        /// </summary>
+        public static ICommunicating EmailModule { get; set; }
 
         /// <summary>
         /// WebSocket模块

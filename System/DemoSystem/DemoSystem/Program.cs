@@ -14,9 +14,23 @@ namespace DemoSystem
 
             Console.WriteLine("启动成功");
 
+            var email = InjectionModule.EmailModule;
             var demo = InjectionModule.DemoModule;
             var userInfo = new UserInfo { UserId = "test", UserName = "test_user" };
             var data = new DemoModel { PrimaryKey = 10, Message = "系统调用验证" };
+
+            //email.Send(new RegistryLibrary.BasicModule.CommunicatingModel()
+            //{
+            //    Template = "测试发送：${code}",
+            //    TemplateContent = new System.Collections.Generic.Dictionary<string, string>
+            //    {
+            //        { "code", "123456" }
+            //    },
+            //    Recipients = new System.Collections.Generic.List<string> {
+            //        "xy609284278@126.com",
+            //        "609284278@qq.com",
+            //    }
+            //});
 
             Invoke(demo, userInfo, data);
 

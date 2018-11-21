@@ -2,27 +2,12 @@
 # 此 .gitignore 文件已由 Microsoft(R) Visual Studio 自动创建。
 ################################################################################
 
-/Module/DemoModule/DemoModule/bin
-/Module/DemoModule/DemoModule/obj
-/Module/DemoModule/packages
-/Module/FileModule/FileModule/bin
-/Module/FileModule/FileModule/obj
-/Module/FileModule/packages
-/Module/LoggingModule/LoggingModule/bin
-/Module/LoggingModule/LoggingModule/obj
-/Module/LoggingModule/packages
-/Module/MessageQueueModule/MessageQueueModule/bin
-/Module/MessageQueueModule/MessageQueueModule/obj
-/Module/MessageQueueModule/packages
 /RegistryLibrary/packages
 /RegistryLibrary/RegistryLibrary/bin
 /RegistryLibrary/RegistryLibrary/obj
-/System/DemoSystem/DemoSystem/bin
-/System/DemoSystem/DemoSystem/obj
-/System/DemoSystem/packages
-/Module/WebSocketModule/packages
-/Module/WebSocketModule/WebSocketModule/bin
-/Module/WebSocketModule/WebSocketModule/obj
-/Module/WebApiModule/packages
-/Module/WebApiModule/WebApiModule/bin
-/Module/WebApiModule/WebApiModule/obj
+/System/*/*/bin
+/System/*/*/obj
+/System/*/packages
+/Module/*/*/bin
+/Module/*/*/obj
+/Module/*/packages

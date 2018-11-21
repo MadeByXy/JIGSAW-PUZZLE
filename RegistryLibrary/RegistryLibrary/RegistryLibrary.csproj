@@ -58,8 +58,13 @@
       <DependentUpon>IDemo.cs</DependentUpon>
     </Compile>
     <Compile Include="AppModule\IDemo.cs" />
+    <Compile Include="BasicModule\CommunicatingModel.cs">
+      <DependentUpon>ICommunicating.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BasicModule\ICommunicating.cs" />
     <Compile Include="BasicModule\ILogging.cs" />
     <Compile Include="BasicModule\IMessageQueue.cs" />
+    <Compile Include="BasicModule\ITimingService.cs" />
     <Compile Include="BasicModule\IUploadFile.cs" />
     <Compile Include="BasicModule\IWebSocket.cs" />
     <Compile Include="BasicModule\WebSocketModel.cs">

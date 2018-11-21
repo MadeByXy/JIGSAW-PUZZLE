@@ -84,6 +84,10 @@
       <Project>{3356cbfe-94a6-40e9-9784-f0b9222482b2}</Project>
       <Name>DemoModule</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Module\EmailModule\EmailModule\EmailModule.csproj">
+      <Project>{d5611e56-acad-4fbb-adaf-01ac784e6442}</Project>
+      <Name>EmailModule</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Module\LoggingModule\LoggingModule\LoggingModule.csproj">
       <Project>{49B70280-6329-466A-AF4D-BC335324E191}</Project>
       <Name>LoggingModule</Name>
@@ -91,6 +95,10 @@
     <ProjectReference Include="..\..\..\Module\MessageQueueModule\MessageQueueModule\MessageQueueModule.csproj">
       <Project>{B67DBB8E-8455-4A55-8D45-E37779034587}</Project>
       <Name>MessageQueueModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Module\TimingServiceModule\TimingServiceModule\TimingServiceModule.csproj">
+      <Project>{7afc6cd0-6b92-4bc4-8522-f3eba79eeb3a}</Project>
+      <Name>TimingServiceModule</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Module\WebApiModule\WebApiModule\WebApiModule.csproj">
       <Project>{3578cfa3-d49e-4846-844c-b74100e14bd5}</Project>

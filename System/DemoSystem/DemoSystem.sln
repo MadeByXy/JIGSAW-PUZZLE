@@ -17,6 +17,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSocketModule", "..\..\Mo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiModule", "..\..\Module\WebApiModule\WebApiModule\WebApiModule.csproj", "{3578CFA3-D49E-4846-844C-B74100E14BD5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommunicatingModule", "..\..\Module\CommunicatingModule\CommunicatingModule\CommunicatingModule.csproj", "{7ADDA58A-260E-4102-BD54-0C5F648C2539}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimingServiceModule", "..\..\Module\TimingServiceModule\TimingServiceModule\TimingServiceModule.csproj", "{7AFC6CD0-6B92-4BC4-8522-F3EBA79EEB3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailModule", "..\..\Module\EmailModule\EmailModule\EmailModule.csproj", "{D5611E56-ACAD-4FBB-ADAF-01AC784E6442}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +57,18 @@ Global
 		{3578CFA3-D49E-4846-844C-B74100E14BD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3578CFA3-D49E-4846-844C-B74100E14BD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3578CFA3-D49E-4846-844C-B74100E14BD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7ADDA58A-260E-4102-BD54-0C5F648C2539}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7ADDA58A-260E-4102-BD54-0C5F648C2539}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7ADDA58A-260E-4102-BD54-0C5F648C2539}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7ADDA58A-260E-4102-BD54-0C5F648C2539}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AFC6CD0-6B92-4BC4-8522-F3EBA79EEB3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AFC6CD0-6B92-4BC4-8522-F3EBA79EEB3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AFC6CD0-6B92-4BC4-8522-F3EBA79EEB3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AFC6CD0-6B92-4BC4-8522-F3EBA79EEB3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5611E56-ACAD-4FBB-ADAF-01AC784E6442}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5611E56-ACAD-4FBB-ADAF-01AC784E6442}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5611E56-ACAD-4FBB-ADAF-01AC784E6442}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5611E56-ACAD-4FBB-ADAF-01AC784E6442}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
