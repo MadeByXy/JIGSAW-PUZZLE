@@ -42,11 +42,11 @@ namespace DemoSystem
             DemoModule = new Demo();
 
             //注入事件
-            DemoModule.PrepareDeleteEvent.Subscribe((DemoModel model, UserInfo user) =>
-            {
-                Console.WriteLine("错误注入测试成功");
-                return new ApiResult<DBNull, DBNull> { Success = false, Message = "错误注入测试" };
-            });
+            //DemoModule.PrepareDeleteEvent.Subscribe((DemoModel model, UserInfo user) =>
+            //{
+            //    Console.WriteLine("错误注入测试成功");
+            //    return new ApiResult<DBNull, DBNull> { Success = false, Message = "错误注入测试" };
+            //});
         }
 
         /// <summary>

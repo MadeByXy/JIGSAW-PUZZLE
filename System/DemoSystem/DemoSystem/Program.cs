@@ -3,9 +3,11 @@ using RegistryLibrary.Exception;
 using RegistryLibrary.Helper;
 using RegistryLibrary.Interface.Common;
 using System;
+using RegistryLibrary.Attribute;
 
 namespace DemoSystem
 {
+    [LogException, TimeSpanRecord]
     class Program
     {
         static void Main(string[] args)
@@ -20,7 +22,7 @@ namespace DemoSystem
             var userInfo = new UserInfo { UserId = "test", UserName = "test_user" };
             var data = new DemoModel { PrimaryKey = 10, Message = "系统调用验证" };
 
-            for(var i = 1; i <= 10; i++)
+            for (var i = 1; i <= 10; i++)
             {
                 var time = i;
                 timing.Invoke(() => Console.WriteLine($"{time}秒后执行"), TimeSpan.FromSeconds(time));

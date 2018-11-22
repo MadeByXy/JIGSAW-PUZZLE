@@ -1,4 +1,5 @@
 ﻿using RegistryLibrary.AppModule;
+using RegistryLibrary.Attribute;
 using RegistryLibrary.Event;
 using RegistryLibrary.Exception;
 using RegistryLibrary.ImplementsClass;
@@ -20,7 +21,7 @@ namespace DemoModule.Model
             //PrepareCreatedEvent = new MessageEvent<DemoModel, UserInfo>("Demo.PrepareCreatedEvent", InjectionModule.MessageQueue);
             CreatedEvent = new MessageEvent<DemoModel, UserInfo>("Demo.CreatedEvent", InjectionModule.MessageQueue);
 
-            PrepareModifiedEvent = new InternalEvent<DemoModel, UserInfo>(); 
+            PrepareModifiedEvent = new InternalEvent<DemoModel, UserInfo>();
             //PrepareModifiedEvent = new MessageEvent<DemoModel, UserInfo>("Demo.PrepareModifiedEvent", InjectionModule.MessageQueue);
             ModifiedEvent = new MessageEvent<DemoModel, UserInfo>("Demo.ModifiedEvent", InjectionModule.MessageQueue);
 
@@ -109,32 +110,17 @@ namespace DemoModule.Model
             });
         }
 
+        [CreateAction]
         public DemoModel Create(DemoModel data, UserInfo userInfo)
         {
-            var result = PrepareCreatedEvent?.PublishAsync(data, userInfo).Result;
-            if (!(result?.Success ?? true))
-            {
-                throw new ActionForbiddenException(result.Message);
-            }
-
             Console.WriteLine("创建成功");
-
-            CreatedEvent?.Publish(data, userInfo);
             return data;
         }
-
+        
+        [DeleteAction]
         public void Delete(int primaryKey, UserInfo userInfo)
         {
-            var data = Detail(primaryKey, userInfo);
-            var result = PrepareDeleteEvent?.PublishAsync(data, userInfo).Result;
-            if (!(result?.Success ?? true))
-            {
-                throw new ActionForbiddenException(result.Message);
-            }
-
             Console.WriteLine("删除成功");
-
-            DeleteEvent?.Publish(data, userInfo);
         }
 
         public DemoModel Detail(int primaryKey, UserInfo userInfo)
@@ -142,17 +128,10 @@ namespace DemoModule.Model
             return new DemoModel() { PrimaryKey = 1, Message = "详情" };
         }
 
+        [ModifiedAction]
         public DemoModel Modified(DemoModel data, UserInfo userInfo)
         {
-            var result = PrepareModifiedEvent?.PublishAsync(data, userInfo).Result;
-            if (!(result?.Success ?? true))
-            {
-                throw new ActionForbiddenException(result.Message);
-            }
-
             Console.WriteLine("修改成功");
-
-            ModifiedEvent?.Publish(data, userInfo);
             return data;
         }
     }

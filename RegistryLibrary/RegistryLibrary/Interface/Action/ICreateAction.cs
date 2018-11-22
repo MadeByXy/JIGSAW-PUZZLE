@@ -1,4 +1,6 @@
-﻿using RegistryLibrary.Interface.Common;
+﻿using RegistryLibrary.Attribute;
+using RegistryLibrary.Interface.Common;
+using RegistryLibrary.Interface.Event;
 using System;
 
 namespace RegistryLibrary.Interface.Action
