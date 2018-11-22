@@ -30,11 +30,11 @@ namespace DemoSystem
             new WebApiModule.InjectionModule("http://localhost:4142");
 
             //初始化定时服务模块
-            var timingService = new TimingService();
+            TimingServiceModule = new TimingService();
 
             //初始化Email模块
-            new EmailModule.InjectionModule("xy609284278@126.com", "xy10742581xy", "smtp.126.com", timingService);
-            //new EmailModule.InjectionModule("609284278@qq.com", "oljkxlpsihvobdjg", "smtp.qq.com", timingService);
+            new EmailModule.InjectionModule("xy609284278@126.com", "xy10742581xy", "smtp.126.com", TimingServiceModule);
+            //new EmailModule.InjectionModule("609284278@qq.com", "oljkxlpsihvobdjg", "smtp.qq.com", TimingServiceModule);
             EmailModule = new EmailModule.Model.Email();
 
             //初始化demo模块
@@ -63,6 +63,11 @@ namespace DemoSystem
         /// WebSocket模块
         /// </summary>
         public static IWebSocket WebSocketModule { get; set; }
+
+        /// <summary>
+        /// 定时服务模块
+        /// </summary>
+        public static ITimingService TimingServiceModule { get; set; }
 
         /// <summary>
         /// 模块名称

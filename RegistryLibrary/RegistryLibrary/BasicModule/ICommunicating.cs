@@ -19,12 +19,12 @@ namespace RegistryLibrary.BasicModule
         /// <param name="data">通信内容</param>
         /// <param name="sendDate">发送时间</param>
         /// <returns>用以取消发送的Key</returns>
-        int SendAsync(CommunicatingModel data, DateTime sendDate);
+        Guid SendAsync(CommunicatingModel data, DateTime sendDate);
 
         /// <summary>
         /// 取消发送通信
         /// </summary>
         /// <param name="sendKey">通信Key</param>
-        void Cancel(int sendKey);
+        void Cancel(Guid sendKey);
     }
 }

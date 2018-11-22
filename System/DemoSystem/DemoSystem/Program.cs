@@ -15,9 +15,16 @@ namespace DemoSystem
             Console.WriteLine("启动成功");
 
             var email = InjectionModule.EmailModule;
+            var timing = InjectionModule.TimingServiceModule;
             var demo = InjectionModule.DemoModule;
             var userInfo = new UserInfo { UserId = "test", UserName = "test_user" };
             var data = new DemoModel { PrimaryKey = 10, Message = "系统调用验证" };
+
+            for(var i = 1; i <= 10; i++)
+            {
+                var time = i;
+                timing.Invoke(() => Console.WriteLine($"{time}秒后执行"), TimeSpan.FromSeconds(time));
+            }
 
             //email.Send(new RegistryLibrary.BasicModule.CommunicatingModel()
             //{

@@ -13,7 +13,7 @@ namespace EmailModule.Model
         /// 发起通信
         /// </summary>
         /// <param name="data">通信内容</param>
-        public void Cancel(int sendKey)
+        public void Cancel(Guid sendKey)
         {
             InjectionModule.TimingService.Cancel(sendKey);
         }
@@ -73,7 +73,7 @@ namespace EmailModule.Model
         /// <param name="data">通信内容</param>
         /// <param name="sendDate">发送时间</param>
         /// <returns>用以取消发送的Key</returns>
-        public int SendAsync(CommunicatingModel data, DateTime sendDate)
+        public Guid SendAsync(CommunicatingModel data, DateTime sendDate)
         {
             return InjectionModule.TimingService.Invoke(() => Send(data), sendDate);
         }
