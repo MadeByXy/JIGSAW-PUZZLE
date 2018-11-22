@@ -5,9 +5,9 @@ using RegistryLibrary.Interface.Common;
 using System;
 using RegistryLibrary.Attribute;
 
+[assembly: LogException]
 namespace DemoSystem
 {
-    [LogException, TimeSpanRecord]
     class Program
     {
         static void Main(string[] args)
@@ -72,6 +72,7 @@ namespace DemoSystem
             Console.Read();
         }
 
+        [TimeSpanRecord]
         static void Invoke(IDemo demo, UserInfo userInfo, DemoModel data)
         {
             try
