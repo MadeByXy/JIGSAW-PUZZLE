@@ -22,7 +22,7 @@ namespace RegistryLibrary.Helper
         public static void StartUp()
         {
             Console.WriteLine("开始注入功能模块");
-            Model = Instance(GetDataFromXml(LoadConfiguration()));
+            Model = InstantiationModules(GetDataFromXml(LoadConfiguration()));
 
             Console.WriteLine("注入完成");
         }
@@ -86,13 +86,14 @@ namespace RegistryLibrary.Helper
                             switch (p_node.Name)
                             {
                                 case "constructor":
+                                    //构造参数
                                     module.ConstructorList.Add(parameter);
                                     break;
                                 case "property":
+                                    //待注入属性
                                     module.PropertyList.Add(parameter);
                                     break;
-                                default:
-                                    break;
+                                default: break;
                             }
                         }
                     }
@@ -104,10 +105,11 @@ namespace RegistryLibrary.Helper
         }
 
         /// <summary>
-        /// 初始化注入
+        /// 实例化模块集合
         /// </summary>
-        /// <param name="model">注入实体信息</param>
-        private static InjectionModel Instance(InjectionModel model)
+        /// <param name="model">模块集合信息</param>
+        /// <returns>实例化模块对象集合</returns>
+        private static InjectionModel InstantiationModules(InjectionModel model)
         {
             //加载待注入模块
             var pendinglist = model.Modules.Select(module => module).ToList();
@@ -125,7 +127,7 @@ namespace RegistryLibrary.Helper
                     {
                         model.InstanceCollection.Add(
                             module.Name,
-                            Instance(module, module.ConstructorList.ToDictionary(
+                            InstantiationModule(module, module.ConstructorList.ToDictionary(
                                 constructor => constructor.Name,
                                 constructor =>
                                 string.IsNullOrEmpty(constructor.Ref) ? constructor.Value : model.InstanceCollection[constructor.Ref])));
@@ -160,15 +162,26 @@ namespace RegistryLibrary.Helper
         }
 
         /// <summary>
-        /// 注入对象
+        /// 实例化模块
         /// </summary>
-        /// <param name="module">待注入对象</param>
-        /// <param name="parameters">参数集合</param>
-        /// <returns>注入结果对象</returns>
-        private static object Instance(InjectionModuleModel module, Dictionary<string, object> parameters)
+        /// <param name="module">待注入模块信息</param>
+        /// <param name="parameters">模块实例化参数集合</param>
+        /// <returns>实例化模块对象</returns>
+        private static object InstantiationModule(InjectionModuleModel module, Dictionary<string, object> parameters)
         {
             var assembly = Assembly.Load(module.Assembly);
+            if (assembly == null)
+            {
+                throw new EntryPointNotFoundException($"{module.Name}模块加载异常",
+                    new System.Exception("未找到指定的程序集"));
+            }
             var type = assembly.GetType(module.Class);
+
+            if (type == null)
+            {
+                throw new EntryPointNotFoundException($"{module.Name}模块加载异常",
+                    new System.Exception("未找到指定的模块"));
+            }
 
             foreach (var constructor in
                 type.GetConstructors().Where(
@@ -182,21 +195,26 @@ namespace RegistryLibrary.Helper
                     {
                         if (parameter.ParameterType.IsInterface)
                         {
+                            //接口直接注入
                             paramsList.Add(parameters[parameter.Name]);
                         }
                         else
                         {
+                            //非接口参数要进行格式转换
                             paramsList.Add(parameters[parameter.Name].ToType(parameter.ParameterType));
                         }
                     }
                     else
                     {
+                        //如果没有匹配成功, 查找下一个实例化方法
                         continue;
                     }
                 }
                 return constructor.Invoke(paramsList.ToArray());
             }
-            return null;
+
+            throw new EntryPointNotFoundException($"{module.Name}模块加载异常",
+                new System.Exception("未找到匹配的构造函数"));
         }
     }
 }

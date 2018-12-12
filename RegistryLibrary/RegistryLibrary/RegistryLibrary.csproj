@@ -90,7 +90,15 @@
     <Compile Include="Helper\DataTableHelper.cs" />
     <Compile Include="Helper\ExtendsHelper.cs" />
     <Compile Include="Helper\InjectionHelper.cs" />
-    <Compile Include="Helper\InjectionModel.cs" />
+    <Compile Include="Helper\InjectionModel.cs">
+      <DependentUpon>InjectionHelper.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\InjectionModuleModel.cs">
+      <DependentUpon>InjectionHelper.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\InjectionParameterModel.cs">
+      <DependentUpon>InjectionHelper.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helper\RedisHelper.cs" />
     <Compile Include="Helper\RedisHelper.Getter.cs">
       <DependentUpon>RedisHelper.cs</DependentUpon>
@@ -135,7 +143,6 @@
     <Compile Include="Interface\Common\RoleInfo.cs" />
     <Compile Include="Interface\Common\UserInfo.cs" />
     <Compile Include="Interface\Dependence\IDatabase.cs" />
-    <Compile Include="Interface\Dependence\IInjection.cs" />
     <Compile Include="Interface\Event\ICreateEvent.cs" />
     <Compile Include="Interface\Event\IDeleteEvent.cs" />
     <Compile Include="Interface\Event\IEvent.2.cs">
@@ -144,9 +151,6 @@
     <Compile Include="Interface\Event\IEvent.cs" />
     <Compile Include="Interface\Event\IModifiedEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -17,12 +17,14 @@ namespace MessageQueueModule.Model
         /// </summary>
         private MessageQueue()
         {
-            var factory = new ConnectionFactory();
-            factory.UserName = ConnectionFactory.DefaultUser;
-            factory.Password = ConnectionFactory.DefaultPass;
-            factory.VirtualHost = ConnectionFactory.DefaultVHost;
-            factory.HostName = "localhost";
-            factory.Port = AmqpTcpEndpoint.UseDefaultPort;
+            var factory = new ConnectionFactory
+            {
+                UserName = ConnectionFactory.DefaultUser,
+                Password = ConnectionFactory.DefaultPass,
+                VirtualHost = ConnectionFactory.DefaultVHost,
+                HostName = "localhost",
+                Port = AmqpTcpEndpoint.UseDefaultPort
+            };
 
             Connection = factory.CreateConnection();
         }

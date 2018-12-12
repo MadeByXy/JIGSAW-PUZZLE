@@ -1,10 +1,9 @@
 ﻿using RegistryLibrary.AppModule;
 using RegistryLibrary.BasicModule;
-using RegistryLibrary.Interface.Dependence;
 
 namespace DemoSystem
 {
-    public class InjectionModule : IInjection
+    public class InjectionModule
     {
         /// <summary>
         /// Demo模块
