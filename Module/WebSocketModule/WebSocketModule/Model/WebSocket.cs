@@ -16,9 +16,12 @@ namespace WebSocketModule.Model
         /// <summary>
         /// 初始化<see cref="WebSocket"/>
         /// </summary>
+        /// <param name="messageQueue">消息队列模块</param>
         /// <param name="port">WebSocket监听端口号</param>
-        public WebSocket(int port)
+        public WebSocket(IMessageQueue messageQueue, int port)
         {
+            MessageQueue = messageQueue;
+
             Socket = new WebSocketServer();
 
             Socket.NewSessionConnected += SessionConnected;
@@ -29,6 +32,11 @@ namespace WebSocketModule.Model
 
             Initialization();
         }
+
+        /// <summary>
+        /// 消息队列模块
+        /// </summary>
+        private IMessageQueue MessageQueue { get; set; }
 
         /// <summary>
         /// 连接池
@@ -62,7 +70,7 @@ namespace WebSocketModule.Model
             {
                 Task.Run(() =>
                 {
-                    InjectionModule.MessageQueue.Publish(data.Channel, data.Data);
+                    MessageQueue.Publish(data.Channel, data.Data);
                 });
             });
 
@@ -70,7 +78,7 @@ namespace WebSocketModule.Model
             {
                 Task.Run(() =>
                 {
-                    InjectionModule.MessageQueue.Subscribe<object>(data.Channel, (result) =>
+                    MessageQueue.Subscribe<object>(data.Channel, (result) =>
                     {
                         Publish(data.UserInfo, data.Channel, result);
                     });
@@ -81,8 +89,7 @@ namespace WebSocketModule.Model
             {
                 Task.Run(() =>
                 {
-                    Publish(data.UserInfo, data.Channel,
-                        InjectionModule.MessageQueue.PublishAsync(data.Channel, data.Data).Result);
+                    Publish(data.UserInfo, data.Channel, MessageQueue.PublishAsync(data.Channel, data.Data).Result);
                 });
             });
         }

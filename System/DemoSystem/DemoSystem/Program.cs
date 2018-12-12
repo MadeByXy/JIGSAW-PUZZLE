@@ -12,7 +12,7 @@ namespace DemoSystem
     {
         static void Main(string[] args)
         {
-            new InjectionModule();
+            InjectionHelper.StartUp();
 
             Console.WriteLine("启动成功");
 

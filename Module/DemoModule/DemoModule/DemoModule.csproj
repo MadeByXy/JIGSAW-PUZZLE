@@ -48,7 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InjectionModule.cs" />
     <Compile Include="Model\Demo.cs" />
     <Compile Include="Model\Demo.Event.cs">
       <DependentUpon>Demo.cs</DependentUpon>

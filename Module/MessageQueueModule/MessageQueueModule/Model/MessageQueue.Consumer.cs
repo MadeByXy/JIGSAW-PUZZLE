@@ -48,7 +48,7 @@ namespace MessageQueueModule.Model
                 }
                 catch (Exception e)
                 {
-                    InjectionModule.Log.LogException(InjectionModule.ModuleName, e, $"队列名称: {queueName}");
+                    Logging.LogException("消息队列模块异常", e, $"队列名称: {queueName}");
                 }
                 finally
                 {

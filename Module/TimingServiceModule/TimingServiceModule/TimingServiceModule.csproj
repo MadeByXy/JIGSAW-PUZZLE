@@ -40,7 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InjectionModule.cs" />
     <Compile Include="Model\TimingService.cs" />
     <Compile Include="Model\TimingService.Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

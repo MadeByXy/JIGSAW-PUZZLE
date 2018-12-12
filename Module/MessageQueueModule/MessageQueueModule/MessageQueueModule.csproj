@@ -49,7 +49,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InjectionModule.cs" />
     <Compile Include="Model\MessageQueue.Consumer.cs">
       <DependentUpon>MessageQueue.cs</DependentUpon>
     </Compile>

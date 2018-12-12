@@ -1,7 +1,7 @@
 ﻿using RegistryLibrary.AppModule;
 using RegistryLibrary.Attribute;
+using RegistryLibrary.BasicModule;
 using RegistryLibrary.Event;
-using RegistryLibrary.Exception;
 using RegistryLibrary.ImplementsClass;
 using RegistryLibrary.Interface.Common;
 using System;
@@ -15,19 +15,21 @@ namespace DemoModule.Model
     /// </summary>
     public partial class Demo : IDemo
     {
-        public Demo()
+        public Demo(IMessageQueue messageQueue)
         {
+            MessageQueue = messageQueue;
+
             PrepareCreatedEvent = new InternalEvent<DemoModel, UserInfo>();
-            //PrepareCreatedEvent = new MessageEvent<DemoModel, UserInfo>("Demo.PrepareCreatedEvent", InjectionModule.MessageQueue);
-            CreatedEvent = new MessageEvent<DemoModel, UserInfo>("Demo.CreatedEvent", InjectionModule.MessageQueue);
+            //PrepareCreatedEvent = new MessageEvent<DemoModel, UserInfo>("Demo.PrepareCreatedEvent", MessageQueue);
+            CreatedEvent = new MessageEvent<DemoModel, UserInfo>("Demo.CreatedEvent", MessageQueue);
 
             PrepareModifiedEvent = new InternalEvent<DemoModel, UserInfo>();
-            //PrepareModifiedEvent = new MessageEvent<DemoModel, UserInfo>("Demo.PrepareModifiedEvent", InjectionModule.MessageQueue);
-            ModifiedEvent = new MessageEvent<DemoModel, UserInfo>("Demo.ModifiedEvent", InjectionModule.MessageQueue);
+            //PrepareModifiedEvent = new MessageEvent<DemoModel, UserInfo>("Demo.PrepareModifiedEvent", MessageQueue);
+            ModifiedEvent = new MessageEvent<DemoModel, UserInfo>("Demo.ModifiedEvent", MessageQueue);
 
             PrepareDeleteEvent = new InternalEvent<DemoModel, UserInfo>();
-            //PrepareDeleteEvent = new MessageEvent<DemoModel, UserInfo>("Demo.PrepareDeleteEvent", InjectionModule.MessageQueue);
-            DeleteEvent = new MessageEvent<DemoModel, UserInfo>("Demo.DeleteEvent", InjectionModule.MessageQueue);
+            //PrepareDeleteEvent = new MessageEvent<DemoModel, UserInfo>("Demo.PrepareDeleteEvent", MessageQueue);
+            DeleteEvent = new MessageEvent<DemoModel, UserInfo>("Demo.DeleteEvent", MessageQueue);
 
             //注入消息队列
             PrepareCreatedEvent.Subscribe((DemoModel data, UserInfo userInfo) =>
@@ -70,6 +72,11 @@ namespace DemoModule.Model
                 Console.WriteLine($"删除结束监听成功, 删除人：{userInfo.UserName}, 附加消息:{data.Message}");
             });
         }
+
+        /// <summary>
+        /// 消息队列模块
+        /// </summary>
+        public static IMessageQueue MessageQueue { get; private set; }
 
         /// <summary>
         /// 主键Id

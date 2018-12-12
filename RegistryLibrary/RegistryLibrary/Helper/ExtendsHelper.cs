@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace RegistryLibrary.Helper
 {
@@ -7,6 +8,36 @@ namespace RegistryLibrary.Helper
     /// </summary>
     public static class ExtendsHelper
     {
+        public static object ToType(this object originalObject, Type type)
+        {
+            if (originalObject == null)
+            {
+                return null;
+            }
+            else if (originalObject.GetType() == typeof(string))
+            {
+                if (type == typeof(string))
+                {
+                    return originalObject;
+                }
+                else
+                {
+                    return JsonConvert.DeserializeObject(originalObject as string, type);
+                }
+            }
+            else
+            {
+                if (type == typeof(string))
+                {
+                    return JsonConvert.SerializeObject(originalObject);
+                }
+                else
+                {
+                    return JsonConvert.DeserializeObject(JsonConvert.SerializeObject(originalObject), type);
+                }
+            }
+        }
+
         /// <summary>
         /// 类型转换
         /// </summary>
@@ -27,7 +58,6 @@ namespace RegistryLibrary.Helper
                 }
                 else
                 {
-
                     return JsonConvert.DeserializeObject<T>(originalObject as string);
                 }
             }

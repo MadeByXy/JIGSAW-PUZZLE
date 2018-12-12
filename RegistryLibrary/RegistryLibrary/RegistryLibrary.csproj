@@ -90,6 +90,7 @@
     <Compile Include="Helper\DataTableHelper.cs" />
     <Compile Include="Helper\ExtendsHelper.cs" />
     <Compile Include="Helper\InjectionHelper.cs" />
+    <Compile Include="Helper\InjectionModel.cs" />
     <Compile Include="Helper\RedisHelper.cs" />
     <Compile Include="Helper\RedisHelper.Getter.cs">
       <DependentUpon>RedisHelper.cs</DependentUpon>

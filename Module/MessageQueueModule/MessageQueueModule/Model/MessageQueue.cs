@@ -10,13 +10,12 @@ namespace MessageQueueModule.Model
     /// </summary>
     public partial class MessageQueue : IMessageQueue
     {
-        private static readonly MessageQueue Instance = new MessageQueue("");
+        private static readonly MessageQueue Instance = new MessageQueue();
 
         /// <summary>
         /// 初始化<see cref="MessageQueue"/>
         /// </summary>
-        /// <param name="data"></param>
-        private MessageQueue(string data)
+        private MessageQueue()
         {
             var factory = new ConnectionFactory();
             factory.UserName = ConnectionFactory.DefaultUser;
@@ -30,9 +29,11 @@ namespace MessageQueueModule.Model
 
         /// <summary>
         /// 实例化<see cref="MessageQueue"/>
+        /// <param name="logging">日志模块</param>
         /// </summary>
-        public MessageQueue()
+        public MessageQueue(ILogging logging)
         {
+            Logging = logging;
             Connection = Instance.Connection;
             Channel = Connection.CreateModel();
 
@@ -47,6 +48,11 @@ namespace MessageQueueModule.Model
             //MainLoop方法会阻塞线程, 所以要放到Task中
             Task.Run(() => { RpcServer.MainLoop(); });
         }
+
+        /// <summary>
+        /// 日志模块
+        /// </summary>
+        private ILogging Logging { get; set; }
 
         private IConnection Connection { get; set; }
 
