@@ -55,7 +55,7 @@ namespace RegistryLibrary.Helper
         private static InjectionModel GetDataFromXml(XmlDocument doc)
         {
             var model = new InjectionModel();
-            foreach (XmlNode node in doc.DocumentElement.FirstChild.ChildNodes)
+            foreach (XmlNode node in doc.DocumentElement.SelectSingleNode("modules").ChildNodes)
             {
                 if (!(node is XmlComment))
                 {
