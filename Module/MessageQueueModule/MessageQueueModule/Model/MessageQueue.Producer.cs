@@ -41,6 +41,23 @@ namespace MessageQueueModule.Model
         }
 
         /// <summary>
+        /// 发布队列消息
+        /// </summary>
+        /// <typeparam name="T">消息数据类型</typeparam>
+        /// <param name="queueName">队列名称</param>
+        /// <param name="data">消息主体</param>
+        /// <remarks>队列消息会将消息发给指定队列, 注意消息只能被接收一次</remarks>
+        public void PublishQueue<T>(string queueName, T data)
+        {
+            Channel.QueueDeclare(queue: queueName, durable: true, exclusive: false, autoDelete: false);
+            Channel.BasicPublish(
+                exchange: "",
+                routingKey: queueName,
+                basicProperties: null,
+                body: data.ToSerialization());
+        }
+
+        /// <summary>
         /// 发布消息
         /// </summary>
         /// <typeparam name="T">消息数据类型</typeparam>

@@ -34,10 +34,29 @@ namespace MessageQueueModule.Model
         /// <param name="callback">回调方法</param>
         public void Subscribe<T>(string queueName, Action<T> callback)
         {
+            //订阅广播时新建一个队列, 这样就不会影响其他队列的接收情况
             var queue = Guid.NewGuid().ToString();
             Channel.QueueDeclare(queue: queue, durable: false, exclusive: false, autoDelete: true);
             Channel.QueueBind(queue, ExchangeName, queueName);
 
+            SubscribeData(queue, callback);
+        }
+
+        public void SubscribeQueue<T>(string queueName, Action<T> callback)
+        {
+            Channel.QueueDeclare(queue: queueName, durable: true, exclusive: false, autoDelete: false);
+
+            SubscribeData(queueName, callback);
+        }
+
+        /// <summary>
+        /// 订阅队列消息
+        /// </summary>
+        /// <typeparam name="T">消息数据类型</typeparam>
+        /// <param name="queueName">队列名称</param>
+        /// <param name="callback">回调方法</param>
+        private void SubscribeData<T>(string queueName, Action<T> callback)
+        {
             EventingBasicConsumer consumer = new EventingBasicConsumer(Channel);
             consumer.Received += (model, deliver) =>
             {
@@ -48,7 +67,9 @@ namespace MessageQueueModule.Model
                 }
                 catch (Exception e)
                 {
-                    Logging.LogException("消息队列模块异常", e, $"队列名称: {queueName}");
+                    //TODO: 记录日志
+                    Console.WriteLine("接收发生异常");
+                    Console.WriteLine(e);
                 }
                 finally
                 {
@@ -59,7 +80,7 @@ namespace MessageQueueModule.Model
 
             //指定消费队列
             Channel.BasicConsume(
-                queue: queue,
+                queue: queueName,
                 autoAck: false,
                 consumer: consumer);
         }
