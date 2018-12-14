@@ -11,7 +11,7 @@ namespace RegistryLibrary.Attribute
     {
         public override void OnException(MethodExecutionArgs args)
         {
-            Console.WriteLine($"{args.Method.Name}方法执行异常：{(args.Exception.InnerException ?? args.Exception).Message}");
+            Console.WriteLine($"{args.Method.Name}方法执行异常：{args.Exception.ToString()}");
         }
     }
 

@@ -132,8 +132,9 @@ namespace RegistryLibrary.Helper
                                 constructor =>
                                 string.IsNullOrEmpty(constructor.Ref) ? constructor.Value : model.InstanceCollection[constructor.Ref])));
                         pendinglist.Remove(module);
+
+                        is_load = true;
                     }
-                    is_load = true;
                 }
 
                 if (is_load)
