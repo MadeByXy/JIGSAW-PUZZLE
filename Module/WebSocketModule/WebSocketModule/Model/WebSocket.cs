@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using RegistryLibrary.BasicModule;
 using RegistryLibrary.Interface.Common;
+using SuperSocket.SocketBase.Config;
 using SuperWebSocket;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,8 @@ namespace WebSocketModule.Model
         /// </summary>
         /// <param name="messageQueue">消息队列模块</param>
         /// <param name="port">WebSocket监听端口号</param>
-        public WebSocket(IMessageQueue messageQueue, int port)
+        /// <param name="maxConnectionNumber">最大连接数</param>
+        public WebSocket(IMessageQueue messageQueue, int port,int maxConnectionNumber)
         {
             MessageQueue = messageQueue;
 
@@ -27,7 +29,12 @@ namespace WebSocketModule.Model
             Socket.NewSessionConnected += SessionConnected;
             Socket.NewMessageReceived += MessageReceived;
             Socket.SessionClosed += SessionClosed;
-            Socket.Setup(port);
+            Socket.Setup(new ServerConfig
+            {
+                Ip = "Any",
+                Port = port,
+                MaxConnectionNumber = maxConnectionNumber,
+            });
             Socket.Start();
 
             Initialization();
